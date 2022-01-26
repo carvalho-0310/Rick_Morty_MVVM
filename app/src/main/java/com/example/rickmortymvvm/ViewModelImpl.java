@@ -24,11 +24,13 @@ import static com.example.rickmortymvvm.ApresentationCharacterListAction.*;
 public class ViewModelImpl implements ViewModel {
 
     private int page = 1;
-    private Retrofit rf = new Retrofit.
-            Builder().
-            baseUrl(CharacterSevice.BASE_URL).
-            addConverterFactory(GsonConverterFactory.create()).
-            build();
+    private int pages = 1;
+
+    private Retrofit rf = new Retrofit
+            .Builder()
+            .baseUrl(CharacterSevice.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
     private CharacterSevice service = rf.create(CharacterSevice.class);
     private MutableObservable mutableObservable = new MutableObservableImpl();
     private List<Character> list = new ArrayList<>();
@@ -59,7 +61,7 @@ public class ViewModelImpl implements ViewModel {
 
     private void requestCharacterList() {
         final String TAG = "service";
-        if (page <= 42) {
+        if (page <= pages) {
             mutableObservable.update(new ApresentatationCharacterListState(true, list, true, false));
             service.listCharacter(page)
                     .enqueue(
@@ -73,9 +75,11 @@ public class ViewModelImpl implements ViewModel {
                                     } else {
                                         CharacterResponseVO characterResponse = response.body();
                                         mutableObservable.update(new ApresentatationCharacterListState(false, characterResponse.getResults(), true, false));
+                                        pages = characterResponse.getInfo().getPages();
                                         page++;
                                     }
                                 }
+
                                 @Override
                                 public void onFailure(Call<CharacterResponseVO> call, Throwable t) {
                                     Log.e(TAG, "Erro: " + t.getMessage());
