@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6E6E6"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_info"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_character"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/status_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/species_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/gender_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/origin_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/localizacao_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/easter_egg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+    </LinearLayout>
+</ScrollView>
