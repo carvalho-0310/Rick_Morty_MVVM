@@ -73,6 +73,7 @@ public class ViewModelImpl implements ViewModel {
                                     } else {
                                         CharacterResponseVO characterResponse = response.body();
                                         mutableObservable.update(new ApresentatationCharacterListState(false, characterResponse.getResults(), true, false));
+                                        page++;
                                     }
                                 }
                                 @Override
@@ -81,7 +82,7 @@ public class ViewModelImpl implements ViewModel {
                                     mutableObservable.update(new ApresentatationCharacterListState(false, list, false, true));
                                 }
                             });
-            page++;
+
         }
     }
 }
