@@ -1,7 +1,7 @@
 package com.example.rickmortymvvm;
 
-public abstract class ApresentationCharacterListAction {
-     public static class GoToInfo extends ApresentationCharacterListAction {
+public abstract class PresentationCharacterListAction {
+     public static class GoToInfo extends PresentationCharacterListAction {
           private final Character character;
 
           public GoToInfo(Character character) {
@@ -13,7 +13,7 @@ public abstract class ApresentationCharacterListAction {
           }
      }
 
-     public static class Finish extends ApresentationCharacterListAction {
+     public static class Finish extends PresentationCharacterListAction {
 
      }
 }

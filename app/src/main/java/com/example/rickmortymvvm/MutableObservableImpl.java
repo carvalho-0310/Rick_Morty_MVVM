@@ -8,13 +8,13 @@ public class MutableObservableImpl implements MutableObservable {
     private Observer observer;
 
     @Override
-    public void update(ApresentatationCharacterListState state) {
+    public void update(PresentationCharacterListState state) {
         observer.notify(state);
     }
 
     @Override
-    public void update(ApresentationCharacterListAction acition) {
-        observer.notify(acition);
+    public void update(PresentationCharacterListAction action) {
+        observer.notify(action);
     }
 
     @Override

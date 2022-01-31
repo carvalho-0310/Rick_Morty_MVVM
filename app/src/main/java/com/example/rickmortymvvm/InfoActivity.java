@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.Objects;
 
-public class InfosActivity extends AppCompatActivity {
+public class InfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,11 +20,11 @@ import java.util.List;
 public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdapter.ViewHolder> {
 
     private List<Character> list = new ArrayList<>();
-    private ApresentationCharacterListActivity apresentationCharacterListActivity;
+    private PresentationCharacterListActivity presentationCharacterListActivity;
 
 
-    public ListCharacterAdapter(ApresentationCharacterListActivity apresentationCharacterListActivity) {
-        this.apresentationCharacterListActivity = apresentationCharacterListActivity;
+    public ListCharacterAdapter(PresentationCharacterListActivity presentationCharacterListActivity) {
+        this.presentationCharacterListActivity = presentationCharacterListActivity;
     }
 
     public void setListAdapter(List<Character> listCharacter) {
@@ -37,7 +37,7 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
     public ListCharacterAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.model_main_activity, parent, false);
-        return new ViewHolder(view, apresentationCharacterListActivity);
+        return new ViewHolder(view, presentationCharacterListActivity);
     }
 
     @Override

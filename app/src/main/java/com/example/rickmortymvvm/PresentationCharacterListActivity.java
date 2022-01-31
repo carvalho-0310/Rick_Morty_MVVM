@@ -18,9 +18,9 @@ import com.example.rickmortymvvm.intrefaces.ViewModel;
 
 import java.util.List;
 
-import static com.example.rickmortymvvm.ApresentationCharacterListAction.*;
+import static com.example.rickmortymvvm.PresentationCharacterListAction.*;
 
-public class ApresentationCharacterListActivity extends AppCompatActivity implements OnClickCharacter, Observer {
+public class PresentationCharacterListActivity extends AppCompatActivity implements OnClickCharacter, Observer {
 
     private ListCharacterAdapter characterListAdapter = new ListCharacterAdapter(this);
     private ViewModel viewModel = new ViewModelImpl();
@@ -58,9 +58,9 @@ public class ApresentationCharacterListActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void notify(ApresentatationCharacterListState state) {
+    public void notify(PresentationCharacterListState state) {
         setupLoading(state.isLoadingVisible());
-        setCharacterList(state.getListChracter());
+        setCharacterList(state.getListCharacter());
         setupListCharacter(state.isListCharacterVisible());
         setupModalError(state.isShowModalErrorVisible());
     }
@@ -99,7 +99,7 @@ public class ApresentationCharacterListActivity extends AppCompatActivity implem
                     .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(ApresentationCharacterListActivity.this, "Porra Morty você fudeo comigo", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PresentationCharacterListActivity.this, "Porra Morty você fudeo comigo", Toast.LENGTH_SHORT).show();
                             viewModel.onClickQuit();
                         }
                     })
@@ -110,7 +110,7 @@ public class ApresentationCharacterListActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void notify(ApresentationCharacterListAction action) {
+    public void notify(PresentationCharacterListAction action) {
         if (action instanceof GoToInfo) {
             Character character = ((GoToInfo) action).getCharacter();
             startInfo(character);
@@ -120,7 +120,7 @@ public class ApresentationCharacterListActivity extends AppCompatActivity implem
     }
 
     private void startInfo(Character character) {
-        Intent intent = new Intent(this, InfosActivity.class);
+        Intent intent = new Intent(this, InfoActivity.class);
         intent.putExtra("c", character);
         startActivity(intent);
     }

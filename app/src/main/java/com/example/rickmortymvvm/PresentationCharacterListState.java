@@ -2,16 +2,16 @@ package com.example.rickmortymvvm;
 
 import java.util.List;
 
-public class ApresentatationCharacterListState {
+public class PresentationCharacterListState {
 
     private final boolean isLoadingVisible;
-    private final List<Character> listChracter ;
+    private final List<Character> listCharacter;
     private final boolean isListCharacterVisible;
     private final boolean isShowModalErrorVisible;
 
-    public ApresentatationCharacterListState(boolean isLoadingVisible, List<Character> listChracter, boolean isListCharacterVisible, boolean isShowModalErrorVisible) {
+    public PresentationCharacterListState(boolean isLoadingVisible, List<Character> listCharacter, boolean isListCharacterVisible, boolean isShowModalErrorVisible) {
         this.isLoadingVisible = isLoadingVisible;
-        this.listChracter = listChracter;
+        this.listCharacter = listCharacter;
         this.isListCharacterVisible = isListCharacterVisible;
         this.isShowModalErrorVisible = isShowModalErrorVisible;
     }
@@ -20,8 +20,8 @@ public class ApresentatationCharacterListState {
         return isLoadingVisible;
     }
 
-    public List<Character> getListChracter() {
-        return listChracter;
+    public List<Character> getListCharacter() {
+        return listCharacter;
     }
 
     public boolean isListCharacterVisible() {

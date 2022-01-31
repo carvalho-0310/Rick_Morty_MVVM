@@ -3,7 +3,9 @@ package com.example.rickmortymvvm;
 import android.util.Log;
 
 
-import com.example.rickmortymvvm.intrefaces.CharacterSevice;
+import androidx.annotation.NonNull;
+
+import com.example.rickmortymvvm.intrefaces.CharacterService;
 import com.example.rickmortymvvm.intrefaces.MutableObservable;
 import com.example.rickmortymvvm.intrefaces.Observable;
 import com.example.rickmortymvvm.intrefaces.ViewModel;
@@ -19,7 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.rickmortymvvm.ApresentationCharacterListAction.*;
+import static com.example.rickmortymvvm.PresentationCharacterListAction.*;
 
 public class ViewModelImpl implements ViewModel {
 
@@ -28,10 +30,10 @@ public class ViewModelImpl implements ViewModel {
 
     private Retrofit rf = new Retrofit
             .Builder()
-            .baseUrl(CharacterSevice.BASE_URL)
+            .baseUrl(CharacterService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-    private CharacterSevice service = rf.create(CharacterSevice.class);
+    private CharacterService service = rf.create(CharacterService.class);
     private MutableObservable mutableObservable = new MutableObservableImpl();
     private List<Character> list = new ArrayList<>();
 
@@ -62,28 +64,29 @@ public class ViewModelImpl implements ViewModel {
     private void requestCharacterList() {
         final String TAG = "service";
         if (page <= pages) {
-            mutableObservable.update(new ApresentatationCharacterListState(true, list, true, false));
+            mutableObservable.update(new PresentationCharacterListState(true, list, true, false));
             service.listCharacter(page)
                     .enqueue(
                             new Callback<CharacterResponseVO>() {
                                 @Override
-                                public void onResponse(Call<CharacterResponseVO> call, Response<CharacterResponseVO> response) {
+                                public void onResponse(@NonNull Call<CharacterResponseVO> call, @NonNull Response<CharacterResponseVO> response) {
                                     if (!response.isSuccessful()) {
-                                        Log.i(TAG, "Erro: " + response.code());
-                                        mutableObservable.update(new ApresentatationCharacterListState(false, list, false, true));
+                                        Log.i(TAG, "Error: " + response.code());
+                                        mutableObservable.update(new PresentationCharacterListState(false, list, false, true));
 
                                     } else {
                                         CharacterResponseVO characterResponse = response.body();
-                                        mutableObservable.update(new ApresentatationCharacterListState(false, characterResponse.getResults(), true, false));
+                                        assert characterResponse != null;
+                                        mutableObservable.update(new PresentationCharacterListState(false, characterResponse.getResults(), true, false));
                                         pages = characterResponse.getInfo().getPages();
                                         page++;
                                     }
                                 }
 
                                 @Override
-                                public void onFailure(Call<CharacterResponseVO> call, Throwable t) {
-                                    Log.e(TAG, "Erro: " + t.getMessage());
-                                    mutableObservable.update(new ApresentatationCharacterListState(false, list, false, true));
+                                public void onFailure(@NonNull Call<CharacterResponseVO> call, @NonNull Throwable t) {
+                                    Log.e(TAG, "Error : " + t.getMessage());
+                                    mutableObservable.update(new PresentationCharacterListState(false, list, false, true));
                                 }
                             });
 

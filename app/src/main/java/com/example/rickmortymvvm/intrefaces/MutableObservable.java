@@ -1,10 +1,10 @@
 package com.example.rickmortymvvm.intrefaces;
 
-import com.example.rickmortymvvm.ApresentatationCharacterListState;
-import com.example.rickmortymvvm.ApresentationCharacterListAction;
+import com.example.rickmortymvvm.PresentationCharacterListState;
+import com.example.rickmortymvvm.PresentationCharacterListAction;
 
 public interface MutableObservable extends Observable {
-    void update(ApresentatationCharacterListState apresentatationCharacterListState);
+    void update(PresentationCharacterListState presentationCharacterListState);
 
-    void update(ApresentationCharacterListAction acition);
+    void update(PresentationCharacterListAction action);
 }
