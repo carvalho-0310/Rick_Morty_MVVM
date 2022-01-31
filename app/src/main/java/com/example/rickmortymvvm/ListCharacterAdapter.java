@@ -62,14 +62,6 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
             nameView = itemView.findViewById(R.id.name);
             statusView = itemView.findViewById(R.id.status);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickCharacter.onClickCharacter(character);
-
-                }
-
-            });
         }
 
 
@@ -78,8 +70,8 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
             Glide.with(imageView)
                     .load(character.getImage())
                     .into(imageView);
-            nameView.setText(character.getName().replace("Name: ", ""));
-            statusView.setText(character.getStatus().replace("Status: ", ""));
+            nameView.setText(character.getName());
+            statusView.setText(character.getStatus());
             if (character.getStatus().contains("Dead")) {
                 int color = ContextCompat.getColor(statusView.getContext(), R.color.colorRed);
                 statusView.setTextColor(color);
