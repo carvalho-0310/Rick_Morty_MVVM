@@ -28,7 +28,7 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
     }
 
     public void setListAdapter(List<Character> listCharacter) {
-        list.addAll(listCharacter);
+        list =listCharacter;
         notifyDataSetChanged();
     }
 
