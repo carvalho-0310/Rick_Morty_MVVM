@@ -1,7 +1,7 @@
 package com.example.rickmortymvvm.intrefaces;
 
-import com.example.rickmortymvvm.PresentationCharacterListState;
-import com.example.rickmortymvvm.PresentationCharacterListAction;
+import com.example.rickmortymvvm.services.PresentationCharacterListState;
+import com.example.rickmortymvvm.services.PresentationCharacterListAction;
 
 public interface Observer {
     void notify(PresentationCharacterListState state);

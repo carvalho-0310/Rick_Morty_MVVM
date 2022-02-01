@@ -1,10 +1,15 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.models;
 
 import java.util.List;
 
-public class CharacterResponseVO {
+public class CharacterResponseInfoVO {
     private CharacterResponseInfoVO info;
     private List<Character> results;
+    private int pages;
+
+    public int getPages() {
+        return pages;
+    }
 
     public CharacterResponseInfoVO getInfo() {
         return info;
@@ -14,3 +19,4 @@ public class CharacterResponseVO {
         return results;
     }
 }
+

@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.Objects;
+
+import com.example.rickmortymvvm.R;
+import com.example.rickmortymvvm.models.Character;
 
 public class InfoActivity extends AppCompatActivity {
 

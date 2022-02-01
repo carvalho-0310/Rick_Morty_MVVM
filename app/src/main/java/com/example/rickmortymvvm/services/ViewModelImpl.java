@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.services;
 
 import android.util.Log;
 
@@ -15,13 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.example.rickmortymvvm.models.Character;
+import com.example.rickmortymvvm.models.CharacterResponseVO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.rickmortymvvm.PresentationCharacterListAction.*;
+import static com.example.rickmortymvvm.services.PresentationCharacterListAction.*;
 
 public class ViewModelImpl implements ViewModel {
 

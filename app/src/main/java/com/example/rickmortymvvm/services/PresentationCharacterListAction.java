@@ -1,4 +1,6 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.services;
+
+import com.example.rickmortymvvm.models.Character;
 
 public abstract class PresentationCharacterListAction {
      public static class GoToInfo extends PresentationCharacterListAction {

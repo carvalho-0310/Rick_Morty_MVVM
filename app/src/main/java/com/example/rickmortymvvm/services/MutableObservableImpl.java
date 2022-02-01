@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.services;
 
 
 import com.example.rickmortymvvm.intrefaces.MutableObservable;

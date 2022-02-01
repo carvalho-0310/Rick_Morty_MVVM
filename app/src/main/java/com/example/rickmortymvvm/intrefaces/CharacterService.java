@@ -1,6 +1,6 @@
 package com.example.rickmortymvvm.intrefaces;
 
-import com.example.rickmortymvvm.CharacterResponseVO;
+import com.example.rickmortymvvm.models.CharacterResponseVO;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

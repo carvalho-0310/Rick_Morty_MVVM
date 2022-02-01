@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -12,13 +12,20 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.rickmortymvvm.services.ListCharacterAdapter;
+import com.example.rickmortymvvm.services.PresentationCharacterListAction;
+import com.example.rickmortymvvm.services.PresentationCharacterListState;
+import com.example.rickmortymvvm.R;
+import com.example.rickmortymvvm.services.ViewModelImpl;
 import com.example.rickmortymvvm.intrefaces.Observer;
 import com.example.rickmortymvvm.intrefaces.OnClickCharacter;
 import com.example.rickmortymvvm.intrefaces.ViewModel;
 
 import java.util.List;
 
-import static com.example.rickmortymvvm.PresentationCharacterListAction.*;
+import com.example.rickmortymvvm.models.Character;
+
+import static com.example.rickmortymvvm.services.PresentationCharacterListAction.*;
 
 public class PresentationCharacterListActivity extends AppCompatActivity implements OnClickCharacter, Observer {
 

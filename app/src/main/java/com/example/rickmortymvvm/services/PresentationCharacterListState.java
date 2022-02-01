@@ -1,6 +1,8 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.services;
 
 import java.util.List;
+
+import com.example.rickmortymvvm.models.Character;
 
 public class PresentationCharacterListState {
 

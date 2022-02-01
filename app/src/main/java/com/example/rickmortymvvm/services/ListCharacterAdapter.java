@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm;
+package com.example.rickmortymvvm.services;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +12,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.rickmortymvvm.R;
 import com.example.rickmortymvvm.intrefaces.OnClickCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.rickmortymvvm.models.Character;
+import com.example.rickmortymvvm.view.PresentationCharacterListActivity;
 
 public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdapter.ViewHolder> {
 
