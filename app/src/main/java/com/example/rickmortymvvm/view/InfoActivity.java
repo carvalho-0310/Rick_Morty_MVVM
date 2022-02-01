@@ -22,6 +22,7 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infos);
         Character character = (Character) getIntent().getSerializableExtra("c");
+        assert character != null;
         Toast.makeText(this, character.getName(), Toast.LENGTH_LONG).show();
         ImageView imageView = findViewById(R.id.image_info);
         TextView nameView = findViewById(R.id.name_info);
@@ -30,32 +31,35 @@ public class InfoActivity extends AppCompatActivity {
         TextView genderView = findViewById(R.id.gender_info);
         TextView idView = findViewById(R.id.id_character);
         TextView originView = findViewById(R.id.origin_info);
-        TextView localizacaoView = findViewById(R.id.localizacao_info);
+        TextView localization = findViewById(R.id.localization_info);
         TextView easterEggView = findViewById(R.id.easter_egg);
 
         Glide.with(imageView)
                 .load(character.getImage())
                 .into(imageView);
-        nameView.setText("Name: " + character.getName());
-        idView.setText("Id: " + character.getId());
-        speciesView.setText("Species: " + character.getSpecies());
-        genderView.setText("Gender: " + character.getGender());
-        originView.setText("Origin: " + character.getOrigin().getName());
-        localizacaoView.setText("Location: " + character.getLocatoin().getName());
+        nameView.setText(getString(R.string.name, character.getName()));
+        idView.setText(getString(R.string.id, character.getId()));
+        statusView.setText(getString(R.string.status,character.getStatus()));
+        speciesView.setText(getString(R.string.species, character.getSpecies()));
+        genderView.setText(getString(R.string.gender, character.getGender()));
+        originView.setText(getString(R.string.origin, character.getOrigin().getName()));
+        localization.setText(getString(R.string.location, character.getLocatoin().getName()));
         if (character.getStatus().contains("Dead")) {
+
             int color = ContextCompat.getColor(statusView.getContext(), R.color.colorRedTrans);
             statusView.setBackgroundColor(color);
         } else if (character.getStatus().contains("Alive")) {
             int color = ContextCompat.getColor(statusView.getContext(), R.color.colorgreemTrans);
             statusView.setBackgroundColor(color);
         }
-        if (character.getName().contains("Rick Sanchez")){
-            easterEggView.setText("This guy is the most fucked up of all universes");
+        if (character.getName().contains("Rick Sanchez")) {
+            easterEggView.setText(getString(R.string.easter_egg));
 
         }
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {

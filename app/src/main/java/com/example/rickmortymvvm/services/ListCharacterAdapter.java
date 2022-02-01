@@ -66,6 +66,15 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
             nameView = itemView.findViewById(R.id.name);
             statusView = itemView.findViewById(R.id.status);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickCharacter.onClickCharacter(character);
+
+                }
+
+            });
+
         }
 
 

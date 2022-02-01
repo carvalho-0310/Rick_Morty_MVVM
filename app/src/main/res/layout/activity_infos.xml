@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:Id="http://schemas.android.com/apk/res-auto"
     android:background="#E6E6E6"
     android:fillViewport="true">
 
@@ -23,6 +24,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/id_character"
             android:layout_width="match_parent"
+            android:text="@string/id"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#000000"
@@ -33,11 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="@string/name"
             android:textColor="#000000"
             android:textSize="21sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status_info"
+            android:text="@string/status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -47,6 +51,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/species_info"
             android:layout_width="match_parent"
+            android:text="@string/species"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#000000"
@@ -56,6 +61,7 @@
             android:id="@+id/gender_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/gender"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="21sp" />
@@ -65,13 +71,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="@string/origin"
             android:textColor="#000000"
             android:textSize="21sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/localizacao_info"
+            android:id="@+id/localization_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/location"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="21sp" />
@@ -80,6 +88,7 @@
             android:id="@+id/easter_egg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/easter_egg"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="21sp" />

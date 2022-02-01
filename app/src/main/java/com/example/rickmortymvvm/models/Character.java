@@ -25,8 +25,8 @@ public class Character implements Serializable {
         this.created = created;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return id+"";
     }
 
     public String getName() {
