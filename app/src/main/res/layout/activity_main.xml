@@ -19,5 +19,5 @@
         android:id="@+id/main_pb_loading"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 </FrameLayout>

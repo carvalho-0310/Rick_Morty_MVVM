@@ -26,7 +26,7 @@ public class Character implements Serializable {
     }
 
     public String getId() {
-        return id+"";
+        return id + "";
     }
 
     public String getName() {
@@ -34,7 +34,7 @@ public class Character implements Serializable {
     }
 
     public String getStatus() {
-        return  status;
+        return status;
     }
 
     public String getImage() {
@@ -42,11 +42,11 @@ public class Character implements Serializable {
     }
 
     public String getSpecies() {
-        return  species;
+        return species;
     }
 
     public String getType() {
-        return  type;
+        return type;
     }
 
     public String getGender() {
@@ -54,11 +54,11 @@ public class Character implements Serializable {
     }
 
     public String getCreated() {
-        return  created;
+        return created;
     }
 
-    public Location getLocatoin() {
-        return  location;
+    public Location getLocation() {
+        return location;
     }
 
     public Origin getOrigin() {

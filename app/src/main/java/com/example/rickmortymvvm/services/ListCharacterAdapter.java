@@ -32,7 +32,7 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
     }
 
     public void setListAdapter(List<Character> listCharacter) {
-        list =listCharacter;
+        list = listCharacter;
         notifyDataSetChanged();
     }
 
@@ -66,14 +66,7 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
             nameView = itemView.findViewById(R.id.name);
             statusView = itemView.findViewById(R.id.status);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickCharacter.onClickCharacter(character);
-
-                }
-
-            });
+            itemView.setOnClickListener(v -> clickCharacter.onClickCharacter(character));
 
         }
 

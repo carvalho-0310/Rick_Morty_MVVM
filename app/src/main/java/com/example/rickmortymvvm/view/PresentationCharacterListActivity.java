@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -97,18 +96,10 @@ public class PresentationCharacterListActivity extends AppCompatActivity impleme
             new AlertDialog.Builder(this)
                     .setTitle("Porra Morty")
                     .setMessage("Você ta sem internet, não fode")
-                    .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            viewModel.onClickTryAgain();
-                        }
-                    })
-                    .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(PresentationCharacterListActivity.this, "Porra Morty você fudeo comigo", Toast.LENGTH_SHORT).show();
-                            viewModel.onClickQuit();
-                        }
+                    .setPositiveButton("Try again", (dialog, which) -> viewModel.onClickTryAgain())
+                    .setNegativeButton("Exit", (dialog, which) -> {
+                        Toast.makeText(PresentationCharacterListActivity.this, "Porra Morty você fudeo comigo", Toast.LENGTH_SHORT).show();
+                        viewModel.onClickQuit();
                     })
                     .setCancelable(false)
                     .create()

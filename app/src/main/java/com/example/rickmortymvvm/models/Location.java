@@ -7,7 +7,7 @@ public class Location implements Serializable {
     private String url;
 
     public String getName() {
-        return  name;
+        return name;
     }
 
     public String getUrl() {

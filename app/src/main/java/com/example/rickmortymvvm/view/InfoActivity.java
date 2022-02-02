@@ -39,11 +39,11 @@ public class InfoActivity extends AppCompatActivity {
                 .into(imageView);
         nameView.setText(getString(R.string.name, character.getName()));
         idView.setText(getString(R.string.id, character.getId()));
-        statusView.setText(getString(R.string.status,character.getStatus()));
+        statusView.setText(getString(R.string.status, character.getStatus()));
         speciesView.setText(getString(R.string.species, character.getSpecies()));
         genderView.setText(getString(R.string.gender, character.getGender()));
         originView.setText(getString(R.string.origin, character.getOrigin().getName()));
-        localization.setText(getString(R.string.location, character.getLocatoin().getName()));
+        localization.setText(getString(R.string.location, character.getLocation().getName()));
         if (character.getStatus().contains("Dead")) {
 
             int color = ContextCompat.getColor(statusView.getContext(), R.color.colorRedTrans);
@@ -59,7 +59,6 @@ public class InfoActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {

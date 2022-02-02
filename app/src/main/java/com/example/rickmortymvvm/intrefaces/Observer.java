@@ -5,5 +5,6 @@ import com.example.rickmortymvvm.services.PresentationCharacterListAction;
 
 public interface Observer {
     void notify(PresentationCharacterListState state);
-    void  notify(PresentationCharacterListAction action);
+
+    void notify(PresentationCharacterListAction action);
 }

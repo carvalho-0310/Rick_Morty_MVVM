@@ -2,7 +2,6 @@ package com.example.rickmortymvvm.services;
 
 import android.util.Log;
 
-
 import androidx.annotation.NonNull;
 
 import com.example.rickmortymvvm.intrefaces.CharacterService;
@@ -10,13 +9,12 @@ import com.example.rickmortymvvm.intrefaces.MutableObservable;
 import com.example.rickmortymvvm.intrefaces.Observable;
 import com.example.rickmortymvvm.intrefaces.ViewModel;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.example.rickmortymvvm.models.Character;
 import com.example.rickmortymvvm.models.CharacterResponseVO;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,12 +72,14 @@ public class ViewModelImpl implements ViewModel {
                                 public void onResponse(@NonNull Call<CharacterResponseVO> call, @NonNull Response<CharacterResponseVO> response) {
                                     if (!response.isSuccessful()) {
                                         Log.i(TAG, "Error: " + response.code());
+
                                         mutableObservable.update(new PresentationCharacterListState(false, list, false, true));
 
                                     } else {
                                         CharacterResponseVO characterResponse = response.body();
                                         assert characterResponse != null;
-                                        mutableObservable.update(new PresentationCharacterListState(false, characterResponse.getResults(), true, false));
+                                        list.addAll(characterResponse.getResults());
+                                        mutableObservable.update(new PresentationCharacterListState(false, list, true, false));
                                         pages = characterResponse.getInfo().getPages();
                                         page++;
                                     }

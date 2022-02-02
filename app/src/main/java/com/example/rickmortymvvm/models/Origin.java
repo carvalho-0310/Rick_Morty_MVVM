@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Origin implements Serializable {
     private String name;
-    private  String url;
+    private String url;
 
     public String getName() {
-        return  name;
+        return name;
     }
 
     public String getUrl() {
