@@ -2,15 +2,13 @@ package com.example.rickmortymvvm.services;
 
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.example.rickmortymvvm.models.Character;
-
 import java.util.List;
 
-public class DiffUtilImpl extends DiffUtil.Callback {
-    List<Character> oldList;
-    List<Character> newList;
+public class DiffUtilGeneric<T extends DiffUtilGeneric.Compare<T>> extends DiffUtil.Callback {
+    List<T> oldList;
+    List<T> newList;
 
-    public DiffUtilImpl(List<Character> oldList, List<Character> newList) {
+    public DiffUtilGeneric(List<T> oldList, List<T> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }
@@ -32,7 +30,10 @@ public class DiffUtilImpl extends DiffUtil.Callback {
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return newList.get(newItemPosition).equals(oldList.get(oldItemPosition));
+        return newList.get(newItemPosition).isEqual(oldList.get(oldItemPosition));
     }
 
+    public interface Compare<T> {
+        boolean isEqual(T o);
+    }
 }

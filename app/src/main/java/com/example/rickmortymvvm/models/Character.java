@@ -1,8 +1,10 @@
 package com.example.rickmortymvvm.models;
 
+import com.example.rickmortymvvm.services.DiffUtilGeneric;
+
 import java.io.Serializable;
 
-public class Character implements Serializable {
+public class Character implements Serializable, DiffUtilGeneric.Compare<Character> {
     private final int id;
     private final String name;
     private final String status;
@@ -81,5 +83,10 @@ public class Character implements Serializable {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean isEqual(Character o) {
+        return equals(o);
     }
 }

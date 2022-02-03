@@ -33,7 +33,7 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
     }
 
     public void setListAdapter(List<Character> newList) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilImpl(list, newList));
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilGeneric(list, newList));
         diffResult.dispatchUpdatesTo(this);
 
         list.clear();
