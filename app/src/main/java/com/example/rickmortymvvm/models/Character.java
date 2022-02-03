@@ -64,4 +64,22 @@ public class Character implements Serializable {
     public Origin getOrigin() {
         return origin;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Character character = (Character) o;
+
+        if (id != character.id) return false;
+        return name != null ? name.equals(character.name) : character.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

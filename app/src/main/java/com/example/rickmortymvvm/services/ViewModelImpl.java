@@ -91,7 +91,6 @@ public class ViewModelImpl implements ViewModel {
                                     mutableObservable.update(new PresentationCharacterListState(false, list, false, true));
                                 }
                             });
-
         }
     }
 }

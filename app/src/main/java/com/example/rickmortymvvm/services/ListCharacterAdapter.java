@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -31,9 +32,12 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
         this.presentationCharacterListActivity = presentationCharacterListActivity;
     }
 
-    public void setListAdapter(List<Character> listCharacter) {
-        list = listCharacter;
-        notifyDataSetChanged();
+    public void setListAdapter(List<Character> newList) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilImpl(list, newList));
+        diffResult.dispatchUpdatesTo(this);
+
+        list.clear();
+        list.addAll(newList);
     }
 
     @NonNull
@@ -70,7 +74,6 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
 
         }
 
-
         public void bind(Character character) {
             this.character = character;
             Glide.with(imageView)
@@ -89,6 +92,5 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
                 statusView.setTextColor(color);
             }
         }
-
     }
 }
