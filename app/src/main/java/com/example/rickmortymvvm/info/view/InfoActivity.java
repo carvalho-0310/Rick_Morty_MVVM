@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.view;
+package com.example.rickmortymvvm.info.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;

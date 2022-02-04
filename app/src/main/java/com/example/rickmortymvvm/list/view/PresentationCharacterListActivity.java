@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.view;
+package com.example.rickmortymvvm.list.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -11,20 +11,19 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.rickmortymvvm.services.ListCharacterAdapter;
-import com.example.rickmortymvvm.services.PresentationCharacterListAction;
-import com.example.rickmortymvvm.services.PresentationCharacterListState;
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction;
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState;
 import com.example.rickmortymvvm.R;
-import com.example.rickmortymvvm.services.ViewModelImpl;
+import com.example.rickmortymvvm.list.viewmodel.ViewModelImpl;
 import com.example.rickmortymvvm.intrefaces.Observer;
-import com.example.rickmortymvvm.intrefaces.OnClickCharacter;
-import com.example.rickmortymvvm.intrefaces.ViewModel;
+import com.example.rickmortymvvm.list.viewmodel.ViewModel;
 
 import java.util.List;
 
 import com.example.rickmortymvvm.models.Character;
+import com.example.rickmortymvvm.info.view.InfoActivity;
 
-import static com.example.rickmortymvvm.services.PresentationCharacterListAction.*;
+import static com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.*;
 
 public class PresentationCharacterListActivity extends AppCompatActivity implements OnClickCharacter, Observer {
 
@@ -48,7 +47,7 @@ public class PresentationCharacterListActivity extends AppCompatActivity impleme
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1)) {
-                    viewModel.onClickTryAgain();
+                    viewModel.onScrollFinal();
                 }
             }
         });

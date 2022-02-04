@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.services;
+package com.example.rickmortymvvm.list.viewmodel;
 
 import com.example.rickmortymvvm.models.Character;
 

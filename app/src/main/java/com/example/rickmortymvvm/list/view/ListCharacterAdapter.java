@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.services;
+package com.example.rickmortymvvm.list.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.rickmortymvvm.R;
-import com.example.rickmortymvvm.intrefaces.OnClickCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.rickmortymvvm.models.Character;
-import com.example.rickmortymvvm.view.PresentationCharacterListActivity;
+import com.example.rickmortymvvm.util.adapter.DiffUtilGeneric;
 
 public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdapter.ViewHolder> {
 
@@ -33,11 +32,13 @@ public class ListCharacterAdapter extends RecyclerView.Adapter<ListCharacterAdap
     }
 
     public void setListAdapter(List<Character> newList) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilGeneric(list, newList));
-        diffResult.dispatchUpdatesTo(this);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtilGeneric<>(list, newList));
 
         list.clear();
         list.addAll(newList);
+
+//        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @NonNull

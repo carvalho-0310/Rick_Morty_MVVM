@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.services;
+package com.example.rickmortymvvm.util.adapter;
 
 import androidx.recyclerview.widget.DiffUtil;
 
@@ -25,7 +25,7 @@ public class DiffUtilGeneric<T extends DiffUtilGeneric.Compare<T>> extends DiffU
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return true;
+        return newList.get(newItemPosition).getId() == oldList.get(oldItemPosition).getId();
     }
 
     @Override
@@ -34,6 +34,7 @@ public class DiffUtilGeneric<T extends DiffUtilGeneric.Compare<T>> extends DiffU
     }
 
     public interface Compare<T> {
+        int getId();
         boolean isEqual(T o);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.rickmortymvvm.models;
 
-import com.example.rickmortymvvm.services.DiffUtilGeneric;
+import com.example.rickmortymvvm.util.adapter.DiffUtilGeneric;
 
 import java.io.Serializable;
 
@@ -27,8 +27,8 @@ public class Character implements Serializable, DiffUtilGeneric.Compare<Characte
         this.created = created;
     }
 
-    public String getId() {
-        return id + "";
+    public int getId() {
+        return id;
     }
 
     public String getName() {

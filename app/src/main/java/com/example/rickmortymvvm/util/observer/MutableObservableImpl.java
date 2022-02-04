@@ -1,8 +1,9 @@
-package com.example.rickmortymvvm.services;
+package com.example.rickmortymvvm.util.observer;
 
 
-import com.example.rickmortymvvm.intrefaces.MutableObservable;
 import com.example.rickmortymvvm.intrefaces.Observer;
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction;
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState;
 
 public class MutableObservableImpl implements MutableObservable {
     private Observer observer;

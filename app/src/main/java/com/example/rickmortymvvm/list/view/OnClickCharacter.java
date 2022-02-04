@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.intrefaces;
+package com.example.rickmortymvvm.list.view;
 
 import com.example.rickmortymvvm.models.Character;
 

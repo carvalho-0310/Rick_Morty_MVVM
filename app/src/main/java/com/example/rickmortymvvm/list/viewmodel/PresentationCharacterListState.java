@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.services;
+package com.example.rickmortymvvm.list.viewmodel;
 
 import java.util.List;
 

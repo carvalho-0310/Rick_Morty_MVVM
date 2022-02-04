@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">rickmortymvvm</string>
     <string name="name">Name: %s</string>
-    <string name="id">Id: %s</string>
+    <string name="id">Id: %d</string>
     <string name="easter_egg">This guy is the most fucked up of all universes</string>
     <string name="location">Location: %s</string>
     <string name="gender">Gender: %s</string>
