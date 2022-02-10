@@ -42,8 +42,8 @@ public class InfoActivity extends AppCompatActivity {
         statusView.setText(getString(R.string.status, character.getStatus()));
         speciesView.setText(getString(R.string.species, character.getSpecies()));
         genderView.setText(getString(R.string.gender, character.getGender()));
-        originView.setText(getString(R.string.origin, character.getOrigin().getName()));
-        localization.setText(getString(R.string.location, character.getLocation().getName()));
+        originView.setText(getString(R.string.origin, Objects.requireNonNull(character.getOrigin()).getName()));
+        localization.setText(getString(R.string.location, Objects.requireNonNull(character.getLocation()).getName()));
         if (character.getStatus().contains("Dead")) {
 
             int color = ContextCompat.getColor(statusView.getContext(), R.color.colorRedTrans);
@@ -52,7 +52,7 @@ public class InfoActivity extends AppCompatActivity {
             int color = ContextCompat.getColor(statusView.getContext(), R.color.colorgreemTrans);
             statusView.setBackgroundColor(color);
         }
-        if (character.getName().contains("Rick Sanchez")) {
+        if (false) {
             easterEggView.setText(getString(R.string.easter_egg));
 
         }
