@@ -1,19 +1,19 @@
 package com.example.rickmortymvvm.list.viewmodel
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rickmortymvvm.list.services.CharacterService
-import com.example.rickmortymvvm.list.services.models.CharacterResponseVO
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
 import com.example.rickmortymvvm.models.Character
-import com.example.rickmortymvvm.util.observer.MutableObservable
-import com.example.rickmortymvvm.util.observer.MutableObservableImpl
-import com.example.rickmortymvvm.util.observer.Observable
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.rickmortymvvm.util.observer.MutableMyObservable
+import com.example.rickmortymvvm.util.observer.MutableMyObservableImpl
+import com.example.rickmortymvvm.util.observer.MyObservable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ViewModelImpl : MyViewModel, ViewModel() {
@@ -24,19 +24,24 @@ class ViewModelImpl : MyViewModel, ViewModel() {
     private val rf = Retrofit.Builder()
         .baseUrl(CharacterService.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
-    private val service = rf.create<CharacterService>(CharacterService::class.java)
-    private val mutableObservable: MutableObservable = MutableObservableImpl()
+    private val service = rf.create(CharacterService::class.java)
+    private val mutableObservable: MutableMyObservable = MutableMyObservableImpl()
 
-    private val list: MutableList<Character> = ArrayList()
+    private var list: MutableList<Character> = ArrayList()
+
+    private val _status = MutableLiveData(
+        PresentationCharacterListState(true, list, false, false)
+    )
+
+    val state: LiveData<PresentationCharacterListState>
+        get() = _status
 
     override fun onCreate() {
         if (list.size == 0) {
             requestCharacterList()
-        } else {
-            mutableObservable.update(PresentationCharacterListState(false, list, true, false))
         }
-
     }
 
     override fun onClickCharacter(character: Character?) {
@@ -51,7 +56,7 @@ class ViewModelImpl : MyViewModel, ViewModel() {
         mutableObservable.update(Finish())
     }
 
-    override val observable: Observable
+    override val myObservable: MyObservable
         get() = mutableObservable
 
     override fun onScrollFinal() {
@@ -62,59 +67,42 @@ class ViewModelImpl : MyViewModel, ViewModel() {
         val TAG = "service"
         if (page <= pages && requestAvailable) {
             requestAvailable = false
-            mutableObservable.update(PresentationCharacterListState(true, list, true, false))
-            service.listCharacter(page)
-                ?.enqueue(
-                    object : Callback<CharacterResponseVO?> {
-                        override fun onResponse(
-                            call: Call<CharacterResponseVO?>,
-                            response: Response<CharacterResponseVO?>
-                        ) {
-                            val characterResponse: CharacterResponseVO? = response.body()
-                            if (response.isSuccessful
-                                && characterResponse != null
-                            ) {
-                                list.addAll(characterResponse.results!!)
-                                mutableObservable.update(
-                                    PresentationCharacterListState(
-                                        false,
-                                        list,
-                                        true,
-                                        false
-                                    )
-                                )
-                                pages = characterResponse.info!!.pages
-                                page++
-                            } else {
-                                Log.i(TAG, "Error: " + response.code())
-                                mutableObservable.update(
-                                    PresentationCharacterListState(
-                                        false,
-                                        list,
-                                        false,
-                                        true
-                                    )
-                                )
-                            }
-                            requestAvailable = true
-                        }
+            _status.value = PresentationCharacterListState(true, list, true, false)
+            val disposable = service.listCharacter(page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError {
 
-                        override fun onFailure(call: Call<CharacterResponseVO?>, t: Throwable) {
-                            Log.e(TAG, "Error : " + t.message)
-                            mutableObservable.update(
-                                PresentationCharacterListState(
-                                    false,
-                                    list,
-                                    false,
-                                    true
-                                )
-                            )
-                            requestAvailable = true
-                        }
-                    })
+                    _status.value = PresentationCharacterListState(
+                        false,
+                        list,
+                        false,
+                        true
+                    )
+                    requestAvailable = true
+                }
+                .subscribe { response ->
+                    val results = response?.results
+                    if (results != null) {
+                        list.addAll(response.results)
+                        _status.value = PresentationCharacterListState(
+                            false,
+                            list,
+                            true,
+                            false
+                        )
+                        pages = response.info!!.pages
+                        page++
+                        requestAvailable = true
+                    }
+                }
+
         }
     }
 }
+
+
+
 
 
 

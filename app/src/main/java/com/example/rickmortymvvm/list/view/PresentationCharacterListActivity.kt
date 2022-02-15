@@ -10,29 +10,29 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.info.view.InfoActivity
 import com.example.rickmortymvvm.intrefaces.Observer
-import com.example.rickmortymvvm.list.viewmodel.*
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState
+import com.example.rickmortymvvm.list.viewmodel.ViewModelImpl
 import com.example.rickmortymvvm.models.Character
 
 class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter, Observer {
 
     private val characterListAdapter = ListCharacterAdapter(this)
-    private val myViewModel: MyViewModel by viewModels<ViewModelImpl>()
+    private val myViewModel: ViewModelImpl by viewModels()
     private var pbLoading: ProgressBar? = null
     private var rvCharacter: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("inicio", "inicio da main")
-        super.onCreate(savedInstanceState)
+        super<AppCompatActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myViewModel.observable?.register(this)
+        myViewModel.myObservable.register(this)
         rvCharacter = findViewById(R.id.rv_character)
         rvCharacter!!.adapter = characterListAdapter
         rvCharacter!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -45,7 +45,14 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         })
         pbLoading = findViewById(R.id.main_pb_loading)
         myViewModel.onCreate()
+        myViewModel.state.observe(this){
+                NewStatus-> notify(NewStatus)
+        }
+
     }
+
+
+
 
     override fun onClickCharacter(character: Character?) {
         myViewModel.onClickCharacter(character)
@@ -107,14 +114,10 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("fim","acabou")
-    }
-
     private fun startInfo(character: Character) {
         val intent = Intent(this, InfoActivity::class.java)
         intent.putExtra("c", character)
         startActivity(intent)
     }
 }
+
