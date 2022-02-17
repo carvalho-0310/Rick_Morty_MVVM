@@ -48,13 +48,9 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         myViewModel.state.observe(this){
                 NewStatus-> notify(NewStatus)
         }
-
     }
-
-
-
-
     override fun onClickCharacter(character: Character?) {
+
         myViewModel.onClickCharacter(character)
     }
 

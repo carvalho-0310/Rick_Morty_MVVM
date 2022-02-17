@@ -71,17 +71,7 @@ class ViewModelImpl : MyViewModel, ViewModel() {
             val disposable = service.listCharacter(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError {
-
-                    _status.value = PresentationCharacterListState(
-                        false,
-                        list,
-                        false,
-                        true
-                    )
-                    requestAvailable = true
-                }
-                .subscribe { response ->
+                .subscribe({ response ->
                     val results = response?.results
                     if (results != null) {
                         list.addAll(response.results)
@@ -95,6 +85,14 @@ class ViewModelImpl : MyViewModel, ViewModel() {
                         page++
                         requestAvailable = true
                     }
+                }) {
+                    _status.value = PresentationCharacterListState(
+                        false,
+                        list,
+                        false,
+                        true
+                    )
+                    requestAvailable = true
                 }
 
         }
