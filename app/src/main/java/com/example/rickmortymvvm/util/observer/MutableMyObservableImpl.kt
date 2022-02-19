@@ -10,7 +10,7 @@ class MutableMyObservableImpl : MutableMyObservable {
         observer!!.notify(state)
     }
 
-    override fun update(action: PresentationCharacterListAction?) {
+    override fun update(action: PresentationCharacterListAction) {
         observer!!.notify(action)
     }
 

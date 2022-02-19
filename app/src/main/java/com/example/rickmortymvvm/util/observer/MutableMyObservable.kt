@@ -6,5 +6,5 @@ import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState
 interface MutableMyObservable : MyObservable {
     fun update(state: PresentationCharacterListState)
 
-    fun update(action: PresentationCharacterListAction?)
+    fun update(action: PresentationCharacterListAction)
 }

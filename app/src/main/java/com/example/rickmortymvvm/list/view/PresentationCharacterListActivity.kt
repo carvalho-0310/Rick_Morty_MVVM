@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.info.view.InfoActivity
-import com.example.rickmortymvvm.intrefaces.Observer
+
+
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
@@ -21,7 +23,8 @@ import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState
 import com.example.rickmortymvvm.list.viewmodel.ViewModelImpl
 import com.example.rickmortymvvm.models.Character
 
-class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter, Observer {
+class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
+    com.example.rickmortymvvm.intrefaces.Observer {
 
     private val characterListAdapter = ListCharacterAdapter(this)
     private val myViewModel: ViewModelImpl by viewModels()
@@ -45,12 +48,15 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         })
         pbLoading = findViewById(R.id.main_pb_loading)
         myViewModel.onCreate()
-        myViewModel.state.observe(this){
-                NewStatus-> notify(NewStatus)
+        myViewModel.state.observe(this) { NewStatus ->
+            notify(NewStatus)
+        }
+        myViewModel.action.observe(this) { NewAction ->
+            notify(NewAction)
         }
     }
-    override fun onClickCharacter(character: Character?) {
 
+    override fun onClickCharacter(character: Character?) {
         myViewModel.onClickCharacter(character)
     }
 
@@ -101,12 +107,13 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         }
     }
 
-    override fun notify(action: PresentationCharacterListAction?) {
-        if (action is GoToInfo) {
-            val character = action.character
-            startInfo(character)
-        } else if (action is Finish) {
-            finish()
+    override fun notify(action: PresentationCharacterListAction) {
+        when (action) {
+            Finish -> finish()
+            is GoToInfo -> {
+                val character = action.character
+                startInfo(character)
+            }
         }
     }
 
