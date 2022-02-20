@@ -28,3 +28,6 @@ jobs:
       - run:
           name: Check Unit Tests
           command: ./gradlew clean test --no-daemon
+      - run:
+          name: Check Code Style
+          command: ./gradlew clean ktlintCheck
