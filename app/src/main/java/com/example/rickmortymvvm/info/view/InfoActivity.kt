@@ -25,6 +25,7 @@ class InfoActivity : AppCompatActivity() {
         val idView = findViewById<TextView>(R.id.id_character)
         val originView = findViewById<TextView>(R.id.origin_info)
         val localization = findViewById<TextView>(R.id.localization_info)
+
         Glide.with(imageView)
             .load(character.image)
             .into(imageView)
