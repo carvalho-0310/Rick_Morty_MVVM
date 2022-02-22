@@ -1,69 +1,58 @@
-package com.example.rickmortymvvm.info.view;
+package com.example.rickmortymvvm.info.view
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.example.rickmortymvvm.R
+import com.example.rickmortymvvm.models.Character
+import java.util.*
 
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-
-import java.util.Objects;
-
-import com.example.rickmortymvvm.R;
-import com.example.rickmortymvvm.models.Character;
-
-public class InfoActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_infos);
-        Character character = (Character) getIntent().getSerializableExtra("c");
-        assert character != null;
-        Toast.makeText(this, character.getName(), Toast.LENGTH_LONG).show();
-        ImageView imageView = findViewById(R.id.image_info);
-        TextView nameView = findViewById(R.id.name_info);
-        TextView statusView = findViewById(R.id.status_info);
-        TextView speciesView = findViewById(R.id.species_info);
-        TextView genderView = findViewById(R.id.gender_info);
-        TextView idView = findViewById(R.id.id_character);
-        TextView originView = findViewById(R.id.origin_info);
-        TextView localization = findViewById(R.id.localization_info);
-        TextView easterEggView = findViewById(R.id.easter_egg);
-
+class InfoActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_infos)
+        val character = (intent.getSerializableExtra("c") as Character?)!!
+        Toast.makeText(this, character.name, Toast.LENGTH_LONG).show()
+        val imageView = findViewById<ImageView>(R.id.image_info)
+        val nameView = findViewById<TextView>(R.id.name_info)
+        val statusView = findViewById<TextView>(R.id.status_info)
+        val speciesView = findViewById<TextView>(R.id.species_info)
+        val genderView = findViewById<TextView>(R.id.gender_info)
+        val idView = findViewById<TextView>(R.id.id_character)
+        val originView = findViewById<TextView>(R.id.origin_info)
+        val localization = findViewById<TextView>(R.id.localization_info)
+        val easterEggView = findViewById<TextView>(R.id.easter_egg)
         Glide.with(imageView)
-                .load(character.getImage())
-                .into(imageView);
-        nameView.setText(getString(R.string.name, character.getName()));
-        idView.setText(getString(R.string.id, character.getId()));
-        statusView.setText(getString(R.string.status, character.getStatus()));
-        speciesView.setText(getString(R.string.species, character.getSpecies()));
-        genderView.setText(getString(R.string.gender, character.getGender()));
-        originView.setText(getString(R.string.origin, Objects.requireNonNull(character.getOrigin()).getName()));
-        localization.setText(getString(R.string.location, Objects.requireNonNull(character.getLocation()).getName()));
-        if (character.getStatus().contains("Dead")) {
-
-            int color = ContextCompat.getColor(statusView.getContext(), R.color.colorRedTrans);
-            statusView.setBackgroundColor(color);
-        } else if (character.getStatus().contains("Alive")) {
-            int color = ContextCompat.getColor(statusView.getContext(), R.color.colorgreemTrans);
-            statusView.setBackgroundColor(color);
+            .load(character.image)
+            .into(imageView)
+        nameView.text = getString(R.string.name, character.name)
+        idView.text = getString(R.string.id, character.id)
+        statusView.text = getString(R.string.status, character.status)
+        speciesView.text = getString(R.string.species, character.species)
+        genderView.text = getString(R.string.gender, character.gender)
+        originView.text =
+            getString(R.string.origin, Objects.requireNonNull(character.origin?.name))
+        localization.text =
+            getString(R.string.location, Objects.requireNonNull(character.location?.name))
+        if (character.status.contains("Dead")) {
+            val color = ContextCompat.getColor(statusView.context, R.color.colorRedTrans)
+            statusView.setBackgroundColor(color)
+        } else if (character.status.contains("Alive")) {
+            val color = ContextCompat.getColor(statusView.context, R.color.colorgreemTrans)
+            statusView.setBackgroundColor(color)
         }
         if (false) {
-            easterEggView.setText(getString(R.string.easter_egg));
-
+            easterEggView.text = getString(R.string.easter_egg)
         }
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
+        Objects.requireNonNull(supportActionBar)?.setDisplayHomeAsUpEnabled(true)
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
-
 }
