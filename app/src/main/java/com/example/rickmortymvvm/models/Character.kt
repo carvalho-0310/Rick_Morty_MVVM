@@ -1,6 +1,5 @@
 package com.example.rickmortymvvm.models
 
-
 import com.example.rickmortymvvm.util.adapter.DiffUtilGeneric.Compare
 import java.io.Serializable
 
@@ -16,7 +15,6 @@ class Character(
 ) : Serializable, Compare<Character?> {
     val location: Location? = null
     val origin: Origin? = null
-
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -35,5 +33,4 @@ class Character(
     override fun isEqual(o: Character?): Boolean {
         return equals(o)
     }
-
 }
