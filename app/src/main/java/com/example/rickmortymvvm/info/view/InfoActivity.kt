@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.models.Character
-import java.util.*
+import java.util.Objects
 
 class InfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
