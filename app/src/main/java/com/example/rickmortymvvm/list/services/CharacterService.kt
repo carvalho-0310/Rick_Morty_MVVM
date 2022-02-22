@@ -1,6 +1,5 @@
 package com.example.rickmortymvvm.list.services
 
-
 import com.example.rickmortymvvm.list.services.models.CharacterResponseVO
 import io.reactivex.Observable
 
