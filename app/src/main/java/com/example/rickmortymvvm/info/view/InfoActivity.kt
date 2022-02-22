@@ -25,7 +25,6 @@ class InfoActivity : AppCompatActivity() {
         val idView = findViewById<TextView>(R.id.id_character)
         val originView = findViewById<TextView>(R.id.origin_info)
         val localization = findViewById<TextView>(R.id.localization_info)
-        val easterEggView = findViewById<TextView>(R.id.easter_egg)
         Glide.with(imageView)
             .load(character.image)
             .into(imageView)
@@ -45,9 +44,7 @@ class InfoActivity : AppCompatActivity() {
             val color = ContextCompat.getColor(statusView.context, R.color.colorgreemTrans)
             statusView.setBackgroundColor(color)
         }
-        if (false) {
-            easterEggView.text = getString(R.string.easter_egg)
-        }
+
         Objects.requireNonNull(supportActionBar)?.setDisplayHomeAsUpEnabled(true)
     }
 
