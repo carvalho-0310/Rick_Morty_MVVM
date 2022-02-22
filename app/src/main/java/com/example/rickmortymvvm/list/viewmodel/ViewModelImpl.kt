@@ -8,9 +8,6 @@ import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
 import com.example.rickmortymvvm.models.Character
 import com.example.rickmortymvvm.util.observer.MutableAction
-import com.example.rickmortymvvm.util.observer.MutableMyObservable
-import com.example.rickmortymvvm.util.observer.MutableMyObservableImpl
-import com.example.rickmortymvvm.util.observer.MyObservable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
@@ -28,11 +25,11 @@ class ViewModelImpl : MyViewModel, ViewModel() {
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
     private val service = rf.create(CharacterService::class.java)
-    private val mutableObservable: MutableMyObservable = MutableMyObservableImpl()
+
     private var list: MutableList<Character> = ArrayList()
 
     private val _action = MutableAction<PresentationCharacterListAction>()
-    val action :LiveData<PresentationCharacterListAction>
+    val action: LiveData<PresentationCharacterListAction>
         get() = _action
 
     private val _status = MutableLiveData(
@@ -48,7 +45,7 @@ class ViewModelImpl : MyViewModel, ViewModel() {
     }
 
     override fun onClickCharacter(character: Character?) {
-        _action.sendAction( GoToInfo(character!!))
+        _action.sendAction(GoToInfo(character!!))
     }
 
     override fun onClickTryAgain() {
@@ -58,9 +55,6 @@ class ViewModelImpl : MyViewModel, ViewModel() {
     override fun onClickQuit() {
         _action.value = Finish
     }
-
-    override val myObservable: MyObservable
-        get() = mutableObservable
 
     override fun onScrollFinal() {
         requestCharacterList()
@@ -97,13 +91,6 @@ class ViewModelImpl : MyViewModel, ViewModel() {
                     )
                     requestAvailable = true
                 }
-
         }
     }
 }
-
-
-
-
-
-
