@@ -3,7 +3,6 @@ package com.example.rickmortymvvm.list.view
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.info.view.InfoActivity
 
-
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
@@ -23,8 +21,7 @@ import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState
 import com.example.rickmortymvvm.list.viewmodel.ViewModelImpl
 import com.example.rickmortymvvm.models.Character
 
-class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
-    com.example.rickmortymvvm.intrefaces.Observer {
+class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter {
 
     private val characterListAdapter = ListCharacterAdapter(this)
     private val myViewModel: ViewModelImpl by viewModels()
@@ -32,10 +29,9 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
     private var rvCharacter: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("inicio", "inicio da main")
         super<AppCompatActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myViewModel.myObservable.register(this)
+
         rvCharacter = findViewById(R.id.rv_character)
         rvCharacter!!.adapter = characterListAdapter
         rvCharacter!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -60,7 +56,7 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         myViewModel.onClickCharacter(character)
     }
 
-    override fun notify(state: PresentationCharacterListState) {
+    private fun notify(state: PresentationCharacterListState) {
         setupLoading(state.isLoadingVisible)
         setCharacterList(state.listCharacter)
         setupListCharacter(state.isListCharacterVisible)
@@ -107,7 +103,7 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         }
     }
 
-    override fun notify(action: PresentationCharacterListAction) {
+    private fun notify(action: PresentationCharacterListAction) {
         when (action) {
             Finish -> finish()
             is GoToInfo -> {
@@ -123,4 +119,3 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter,
         startActivity(intent)
     }
 }
-
