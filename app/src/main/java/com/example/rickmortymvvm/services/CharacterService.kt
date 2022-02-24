@@ -1,6 +1,6 @@
-package com.example.rickmortymvvm.list.services
+package com.example.rickmortymvvm.services
 
-import com.example.rickmortymvvm.list.services.models.CharacterResponseVO
+import com.example.rickmortymvvm.services.models.CharacterResponseVO
 import io.reactivex.Observable
 
 import retrofit2.http.GET

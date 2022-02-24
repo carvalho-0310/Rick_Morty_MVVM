@@ -3,10 +3,10 @@ package com.example.rickmortymvvm.list.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.rickmortymvvm.list.services.CharacterService
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
 import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.services.CharacterService
 import com.example.rickmortymvvm.util.observer.MutableAction
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
