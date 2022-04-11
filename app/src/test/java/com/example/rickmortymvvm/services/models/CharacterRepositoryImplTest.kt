@@ -3,6 +3,7 @@ package com.example.rickmortymvvm.services.models
 import android.annotation.SuppressLint
 import com.example.rickmortymvvm.models.Character
 import com.example.rickmortymvvm.services.CharacterDataRemoteImpl
+import com.example.rickmortymvvm.services.CharacterRepositoryImpl
 import com.example.rickmortymvvm.services.CharacterService
 import com.google.common.truth.Truth
 import dev.thiagosouto.butler.file.readFile
@@ -18,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CharacterRepositoryImplTest {
     lateinit var server: MockWebServer
-    lateinit var repositoryRepository: CharacterRepositoryImpl
+    lateinit var repository: CharacterRepositoryImpl
 
     @Before
     fun before() {
@@ -30,7 +31,7 @@ class CharacterRepositoryImplTest {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(CharacterService::class.java)
-        repositoryRepository = CharacterRepositoryImpl(CharacterDataRemoteImpl(service))
+        repository = CharacterRepositoryImpl(CharacterDataRemoteImpl(service))
     }
 
     @After
@@ -47,7 +48,7 @@ class CharacterRepositoryImplTest {
                 )
         )
 
-        val testObserver = repositoryRepository.getListCharacter()
+        val testObserver = repository.getListCharacter()
             .test()
 
         testObserver.assertResult(expectedResult)
@@ -63,7 +64,7 @@ class CharacterRepositoryImplTest {
                 )
         )
 
-        repositoryRepository.getListCharacter()
+        repository.getListCharacter()
             .test()
 
         val request = server.takeRequest()
@@ -74,7 +75,7 @@ class CharacterRepositoryImplTest {
     fun `getListCharacter - When returning status code 500 Should return an HttpException`() {
         server.enqueue(MockResponse().setResponseCode(CODE_INTERNAL_SERVER_ERROR))
 
-        val testObserver = repositoryRepository.getListCharacter()
+        val testObserver = repository.getListCharacter()
             .test()
 
         testObserver.assertFailure(HttpException::class.java)
@@ -89,9 +90,9 @@ class CharacterRepositoryImplTest {
         )
         server.enqueue(MockResponse().setResponseCode(CODE_INTERNAL_SERVER_ERROR))
 
-        repositoryRepository.getListCharacter()
+        repository.getListCharacter()
             .test()
-        repositoryRepository.getListCharacter()
+        repository.getListCharacter()
             .test()
 
         val path1 = server.takeRequest().path
@@ -110,9 +111,9 @@ class CharacterRepositoryImplTest {
                 .setBody(readFile("character/character_page_1_test_answer.json"))
         )
 
-        repositoryRepository.getListCharacter()
+        repository.getListCharacter()
             .test()
-        repositoryRepository.getListCharacter()
+        repository.getListCharacter()
             .test()
 
         val path1 = server.takeRequest().path
@@ -133,9 +134,9 @@ class CharacterRepositoryImplTest {
                 .setBody(readFile("character/character_page_1_test_answer_with_a_page.json"))
         )
 
-        val testObserverPage1 = repositoryRepository.getListCharacter()
+        val testObserverPage1 = repository.getListCharacter()
             .test()
-        val testObserverPage2 = repositoryRepository.getListCharacter()
+        val testObserverPage2 = repository.getListCharacter()
             .test()
 
         testObserverPage1.assertResult(expectedResultOnePage)

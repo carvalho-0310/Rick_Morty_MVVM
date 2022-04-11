@@ -3,57 +3,60 @@ package com.example.rickmortymvvm.list.view
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickmortymvvm.R
+import com.example.rickmortymvvm.databinding.ActivityMainBinding
 import com.example.rickmortymvvm.info.view.InfoActivity
-
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
 import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState
-import com.example.rickmortymvvm.list.viewmodel.ViewModelImpl
+import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListViewModelImpl
 import com.example.rickmortymvvm.models.Character
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter {
 
     private val characterListAdapter = ListCharacterAdapter(this)
-    private val myViewModel: ViewModelImpl by viewModels()
-    private var pbLoading: ProgressBar? = null
-    private var rvCharacter: RecyclerView? = null
+    private val myPresentationCharacterListViewModel: PresentationCharacterListViewModelImpl by viewModel()
+    private lateinit var pbLoading: ProgressBar
+    private lateinit var rvCharacter: RecyclerView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super<AppCompatActivity>.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        super.onCreate(savedInstanceState)
 
-        rvCharacter = findViewById(R.id.rv_character)
-        rvCharacter!!.adapter = characterListAdapter
-        rvCharacter!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        rvCharacter = binding.rvCharacter
+        rvCharacter.adapter = characterListAdapter
+
+        rvCharacter.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    myViewModel.onScrollFinal()
+                    myPresentationCharacterListViewModel.onScrollFinal()
                 }
             }
         })
-        pbLoading = findViewById(R.id.main_pb_loading)
-        myViewModel.onCreate()
-        myViewModel.state.observe(this) { NewStatus ->
+
+        pbLoading = binding.mainPbLoading
+
+        myPresentationCharacterListViewModel.state.observe(this) { NewStatus ->
             notify(NewStatus)
         }
-        myViewModel.action.observe(this) { NewAction ->
+        myPresentationCharacterListViewModel.action.observe(this) { NewAction ->
             notify(NewAction)
         }
     }
 
-    override fun onClickCharacter(character: Character?) {
-        myViewModel.onClickCharacter(character)
+    override fun onClickCharacter(character: Character) {
+        myPresentationCharacterListViewModel.onClickCharacter(character)
     }
 
     private fun notify(state: PresentationCharacterListState) {
@@ -64,11 +67,7 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
     }
 
     private fun setupLoading(isLoadingVisible: Boolean) {
-        if (isLoadingVisible) {
-            pbLoading!!.visibility = View.VISIBLE
-        } else {
-            pbLoading!!.visibility = View.GONE
-        }
+        pbLoading.isVisible = isLoadingVisible
     }
 
     private fun setCharacterList(characterList: List<Character>) {
@@ -76,11 +75,7 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
     }
 
     private fun setupListCharacter(isListCharacterVisible: Boolean) {
-        if (isListCharacterVisible) {
-            rvCharacter!!.visibility = View.VISIBLE
-        } else {
-            rvCharacter!!.visibility = View.GONE
-        }
+        rvCharacter.isVisible = isListCharacterVisible
     }
 
     private fun setupModalError(isShowModalErrorVisible: Boolean) {
@@ -88,14 +83,14 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
             AlertDialog.Builder(this)
                 .setTitle("Porra Morty")
                 .setMessage("Você ta sem internet, não fode")
-                .setPositiveButton("Try again") { dialog: DialogInterface?, which: Int -> myViewModel.onClickTryAgain() }
+                .setPositiveButton("Try again") { dialog: DialogInterface?, which: Int -> myPresentationCharacterListViewModel.onClickTryAgain() }
                 .setNegativeButton("Exit") { dialog: DialogInterface?, which: Int ->
                     Toast.makeText(
                         this@PresentationCharacterListActivity,
                         "Porra Morty você fudeo comigo",
                         Toast.LENGTH_SHORT
                     ).show()
-                    myViewModel.onClickQuit()
+                    myPresentationCharacterListViewModel.onClickQuit()
                 }
                 .setCancelable(false)
                 .create()

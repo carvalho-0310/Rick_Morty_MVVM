@@ -9,8 +9,4 @@ import retrofit2.http.Query
 interface CharacterService {
     @GET("character/")
     fun listCharacter(@Query("page") currentPage: Int): Observable<CharacterResponseVO?>
-
-    companion object {
-        const val BASE_URL = "https://rickandmortyapi.com/api/"
-    }
 }
