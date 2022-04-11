@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6E6E6"
     android:fillViewport="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,8 +17,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_info"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_width="0dp"
+            android:layout_height="386dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.438"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -27,7 +32,9 @@
             android:gravity="center"
             android:text="@string/id"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/image_info"
+            tools:layout_editor_absoluteX="-46dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name_info"
@@ -36,7 +43,9 @@
             android:gravity="center"
             android:text="@string/name"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/id_character"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/status_info"
@@ -45,7 +54,9 @@
             android:gravity="center"
             android:text="@string/status"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/name_info"
+            tools:layout_editor_absoluteX="26dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/species_info"
@@ -54,7 +65,9 @@
             android:gravity="center"
             android:text="@string/species"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/localization_info"
+            tools:layout_editor_absoluteX="-34dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/gender_info"
@@ -63,7 +76,9 @@
             android:gravity="center"
             android:text="@string/gender"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/status_info"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/origin_info"
@@ -72,7 +87,9 @@
             android:gravity="center"
             android:text="@string/origin"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/gender_info"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/localization_info"
@@ -81,15 +98,9 @@
             android:gravity="center"
             android:text="@string/location"
             android:textColor="#000000"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@+id/origin_info"
+            tools:layout_editor_absoluteX="-34dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/easter_egg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/easter_egg"
-            android:textColor="#000000"
-            android:textSize="21sp" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

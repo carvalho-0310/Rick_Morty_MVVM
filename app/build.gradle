@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 31
@@ -16,13 +17,16 @@ android {
 
     buildTypes {
         release {
-
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 
@@ -46,11 +50,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.core:core-ktx:1.7.0"
 
+    implementation "io.insert-koin:koin-android:$koin_version"
+
     testImplementation 'junit:junit:4.13.1'
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
     testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "dev.thiagosouto:file-butler:0.3.0"
-
 }
 
 repositories {

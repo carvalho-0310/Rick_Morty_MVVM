@@ -1,6 +1,6 @@
-package com.example.rickmortymvvm.services.models
+package com.example.rickmortymvvm.services
 
-import com.example.rickmortymvvm.services.CharacterDataRemote
+import com.example.rickmortymvvm.services.models.CharacterResponseVO
 import io.reactivex.Observable
 
 class CharacterRepositoryImpl(

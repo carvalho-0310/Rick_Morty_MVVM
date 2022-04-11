@@ -1,31 +1,34 @@
 package com.example.rickmortymvvm.info.view
 
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.rickmortymvvm.R
+import com.example.rickmortymvvm.databinding.ActivityInfosBinding
 import com.example.rickmortymvvm.models.Character
 import java.util.Objects
 
 class InfoActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityInfosBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_infos)
-        val character = (intent.getSerializableExtra("c") as Character?)!!
+        binding = ActivityInfosBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val character = (intent.getSerializableExtra("c") as Character)
         Toast.makeText(this, character.name, Toast.LENGTH_LONG).show()
-        val imageView = findViewById<ImageView>(R.id.image_info)
-        val nameView = findViewById<TextView>(R.id.name_info)
-        val statusView = findViewById<TextView>(R.id.status_info)
-        val speciesView = findViewById<TextView>(R.id.species_info)
-        val genderView = findViewById<TextView>(R.id.gender_info)
-        val idView = findViewById<TextView>(R.id.id_character)
-        val originView = findViewById<TextView>(R.id.origin_info)
-        val localization = findViewById<TextView>(R.id.localization_info)
-        val easterEggView = findViewById<TextView>(R.id.easter_egg)
+        val imageView = binding.imageInfo
+        val nameView = binding.nameInfo
+        val statusView = binding.statusInfo
+        val speciesView = binding.speciesInfo
+        val genderView = binding.genderInfo
+        val idView = binding.idCharacter
+        val originView = binding.originInfo
+        val localization = binding.localizationInfo
+
         Glide.with(imageView)
             .load(character.image)
             .into(imageView)
@@ -45,9 +48,7 @@ class InfoActivity : AppCompatActivity() {
             val color = ContextCompat.getColor(statusView.context, R.color.colorgreemTrans)
             statusView.setBackgroundColor(color)
         }
-        if (false) {
-            easterEggView.text = getString(R.string.easter_egg)
-        }
+
         Objects.requireNonNull(supportActionBar)?.setDisplayHomeAsUpEnabled(true)
     }
 
