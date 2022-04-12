@@ -19,7 +19,6 @@ class InfoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val character = (intent.getSerializableExtra("c") as Character)
-        Toast.makeText(this, character.name, Toast.LENGTH_LONG).show()
         val imageView = binding.imageInfo
         val nameView = binding.nameInfo
         val statusView = binding.statusInfo

@@ -81,15 +81,10 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
     private fun setupModalError(isShowModalErrorVisible: Boolean) {
         if (isShowModalErrorVisible) {
             AlertDialog.Builder(this)
-                .setTitle("Porra Morty")
-                .setMessage("Você ta sem internet, não fode")
+                .setTitle("Connection problem")
+                .setMessage("You don't have internet")
                 .setPositiveButton("Try again") { dialog: DialogInterface?, which: Int -> myPresentationCharacterListViewModel.onClickTryAgain() }
                 .setNegativeButton("Exit") { dialog: DialogInterface?, which: Int ->
-                    Toast.makeText(
-                        this@PresentationCharacterListActivity,
-                        "Porra Morty você fudeo comigo",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     myPresentationCharacterListViewModel.onClickQuit()
                 }
                 .setCancelable(false)
