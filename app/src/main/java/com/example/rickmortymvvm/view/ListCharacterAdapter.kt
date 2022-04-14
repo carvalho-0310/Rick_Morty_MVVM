@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.list.view
+package com.example.rickmortymvvm.app.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.databinding.ModelMainActivityBinding
-import com.example.rickmortymvvm.models.Character
-import com.example.rickmortymvvm.util.adapter.DiffUtilGeneric
+import com.example.rickmortymvvm.presentation.models.Character
+import com.example.rickmortymvvm.app.util.adapter.DiffUtilGeneric
 
 class ListCharacterAdapter(private val presentationCharacterListActivity: PresentationCharacterListActivity) :
     RecyclerView.Adapter<ListCharacterAdapter.ViewHolder>() {
