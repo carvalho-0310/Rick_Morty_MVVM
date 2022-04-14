@@ -1,6 +1,6 @@
-package com.example.rickmortymvvm.presentation.viewmodel
+package com.example.rickmortymvvm.presentation
 
-import com.example.rickmortymvvm.presentation.models.Character
+import com.example.rickmortymvvm.models.Character
 
 data class PresentationCharacterListState(
     val isLoadingVisible: Boolean,

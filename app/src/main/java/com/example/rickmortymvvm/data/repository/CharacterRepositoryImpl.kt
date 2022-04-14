@@ -1,10 +1,11 @@
-package com.example.rickmortymvvm.services
+package com.example.rickmortymvvm.data.repository
 
-import com.example.rickmortymvvm.services.models.CharacterResponseVO
+import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
+import com.example.rickmortymvvm.data.remote.CharacterDataRemote
 import io.reactivex.Observable
 
 class CharacterRepositoryImpl(
-    private val responseDataRemote: CharacterDataRemote,
+        private val responseDataRemote: CharacterDataRemote,
 ) : CharacterRepository {
 
     private var page = 1
