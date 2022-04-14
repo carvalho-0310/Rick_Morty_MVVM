@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.di
+package com.example.rickmortymvvm.app.di
 
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

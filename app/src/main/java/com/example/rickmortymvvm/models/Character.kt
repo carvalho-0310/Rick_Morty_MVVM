@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.presentation.models
+package com.example.rickmortymvvm.models
 
 import com.example.rickmortymvvm.app.util.adapter.DiffUtilGeneric.Compare
 import java.io.Serializable

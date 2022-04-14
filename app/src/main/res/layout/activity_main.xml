@@ -12,7 +12,7 @@
         android:background="#FDFDFD"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        tools:context=".list.view.PresentationCharacterListActivity"
+        tools:context=".view.PresentationCharacterListActivity"
         tools:listitem="@layout/model_main_activity" />
 
     <ProgressBar

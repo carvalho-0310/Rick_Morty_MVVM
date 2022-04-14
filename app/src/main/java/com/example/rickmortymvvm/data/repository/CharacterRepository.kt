@@ -1,6 +1,6 @@
-package com.example.rickmortymvvm.services
+package com.example.rickmortymvvm.data.repository
 
-import com.example.rickmortymvvm.services.models.CharacterResponseVO
+import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
 import io.reactivex.Observable
 
 interface CharacterRepository {

@@ -1,6 +1,6 @@
-package com.example.rickmortymvvm.data.repository.remote
+package com.example.rickmortymvvm.data.remote
 
-import com.example.rickmortymvvm.data.models.CharacterResponseVO
+import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
 import io.reactivex.Observable
 
 import retrofit2.http.GET

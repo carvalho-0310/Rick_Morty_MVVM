@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.util.observer
+package com.example.rickmortymvvm.app.util.observer
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

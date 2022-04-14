@@ -1,7 +1,7 @@
-package com.example.rickmortymvvm.util.adapter
+package com.example.rickmortymvvm.app.util.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.rickmortymvvm.util.adapter.DiffUtilGeneric.Compare
+import com.example.rickmortymvvm.app.util.adapter.DiffUtilGeneric.Compare
 
 class DiffUtilGeneric<T : Compare<in T>>(var oldList: List<T>, var newList: List<T>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {

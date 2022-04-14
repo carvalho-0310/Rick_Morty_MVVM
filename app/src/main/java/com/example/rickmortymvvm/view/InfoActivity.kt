@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.app.view.info
+package com.example.rickmortymvvm.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.databinding.ActivityInfosBinding
-import com.example.rickmortymvvm.presentation.models.Character
+import com.example.rickmortymvvm.models.Character
 import java.util.Objects
 
 class InfoActivity : AppCompatActivity() {
