@@ -5,7 +5,7 @@ import com.example.rickmortymvvm.data.remote.CharacterDataRemote
 import io.reactivex.Observable
 
 class CharacterRepositoryImpl(
-        private val responseDataRemote: CharacterDataRemote,
+    private val responseDataRemote: CharacterDataRemote,
 ) : CharacterRepository {
 
     private var page = 1

@@ -5,7 +5,7 @@ import com.example.rickmortymvvm.app.util.adapter.DiffUtilGeneric.Compare
 
 class DiffUtilGeneric<T : Compare<in T>>(var oldList: List<T>, var newList: List<T>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
-        return  oldList.size
+        return oldList.size
     }
 
     override fun getNewListSize(): Int {
