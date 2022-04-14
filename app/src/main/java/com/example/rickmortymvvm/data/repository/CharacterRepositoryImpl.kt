@@ -13,7 +13,7 @@ class CharacterRepositoryImpl(
     override fun getListCharacter(): Observable<CharacterResponseVO?> {
         return if (page <= pages) {
             responseDataRemote.requestCharacterList(page)
-                .doOnNext { pages = it?.info?.pages!! }
+                .doOnNext { it?.info?.pages?.let { p -> pages = p } }
                 .doOnComplete { page++ }
         } else {
             Observable.empty()

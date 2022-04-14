@@ -1,13 +1,13 @@
-package com.example.rickmortymvvm.list.viewmodel
+package com.example.rickmortymvvm.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
-import com.example.rickmortymvvm.models.Character
-import com.example.rickmortymvvm.services.CharacterRepository
-import com.example.rickmortymvvm.util.observer.MutableAction
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListAction.Finish
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListAction.GoToInfo
+import com.example.rickmortymvvm.presentation.models.Character
+import com.example.rickmortymvvm.data.repository.CharacterRepository
+import com.example.rickmortymvvm.app.util.observer.MutableAction
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

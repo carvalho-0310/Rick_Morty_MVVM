@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.list.view
+package com.example.rickmortymvvm.app.view
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -9,13 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickmortymvvm.databinding.ActivityMainBinding
-import com.example.rickmortymvvm.info.view.InfoActivity
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.Finish
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListAction.GoToInfo
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListState
-import com.example.rickmortymvvm.list.viewmodel.PresentationCharacterListViewModelImpl
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.app.view.info.InfoActivity
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListAction
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListAction.Finish
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListAction.GoToInfo
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListState
+import com.example.rickmortymvvm.presentation.viewmodel.PresentationCharacterListViewModelImpl
+import com.example.rickmortymvvm.presentation.models.Character
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter {

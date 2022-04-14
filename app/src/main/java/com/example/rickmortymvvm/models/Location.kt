@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.models
+package com.example.rickmortymvvm.presentation.models
 
 import java.io.Serializable
 

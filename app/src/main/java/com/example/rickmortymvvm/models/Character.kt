@@ -1,6 +1,6 @@
-package com.example.rickmortymvvm.models
+package com.example.rickmortymvvm.presentation.models
 
-import com.example.rickmortymvvm.util.adapter.DiffUtilGeneric.Compare
+import com.example.rickmortymvvm.app.util.adapter.DiffUtilGeneric.Compare
 import java.io.Serializable
 
 data class Character(
