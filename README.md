@@ -55,7 +55,7 @@ Para fazer os testes estou usando o padrão [Given-When-Then](https://en.wikiped
 * [Retrofit](https://square.github.io/retrofit/)
 * [RXjava](https://reactivex.io/documentation)
 * [Gson](https://github.com/google/gson)
-* [Jetpack Libraries](https://developer.android.com/jetpack/) (View Model, Lifecycle e LiveData)
+* [Jetpack Libraries](https://developer.android.com/jetpack/) (View Model e LiveData)
 * [Koin](https://github.com/InsertKoinIO/koin)
 * JUnit
 * MockWebServer
