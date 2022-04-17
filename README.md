@@ -79,6 +79,7 @@ A seguir apresento as principais fontes de onde venho me baseando para criar ess
 
 ## Considerações finais
 
-Como esse projeto é apenas para fins didáticos e está em processo de evolução, sinta-se à vontade em me contatar se você tiver alguma dica para me passar ou quiser conversar sobre o código, ficaria feliz em trocar conhecimento com você.
+Como esse projeto é apenas para fins didáticos e está em processo de evolução que você pode acompanhar os próximos passos [aqui](https://github.com/carvalho-0310/Rick_Morty_MVVM/projects/1), sinta-se à vontade em me contatar se você tiver alguma dica para me passar ou quiser conversar sobre o código, ficaria feliz em trocar conhecimento com você.
+
 
 
