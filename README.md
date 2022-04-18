@@ -12,9 +12,11 @@ O Aplicativo usa o [padrão MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93vi
 
 * __UI__ - Contém todas as classes relacionadas à UI (Activities, Adapters, etc.) a ideia dessa camada é delegar lógica para a viewmodel facilitando os testes unitários e ela só interpreta as modelos (State e Action) que vem da viewmodel.
 
-* __Presentation__ - Esta camada está usando a biblioteca [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) para manter o  estado da tela mesmo se ela for recriada, utilizando [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) para expor as modelos (State e Action) para camada de UI  e sendo responsavel pela logica da tela.
-Há modelo State é responsável por cuidar do estado da tela 
-Há modelo de Action é responsável por cuidar das ações da tela, para não manter a ação salva no LiveData implementei a MutableAction para limpar evitando de a ação ser chamada novamente na recriação da tela 
+* __Presentation__ - Esta camada está usando a biblioteca [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) para manter o  estado da tela mesmo se ela for recriada, utilizando [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) para expor as modelos (State e Action) para camada de UI  e sendo responsável pela lógica da tela.
+
+* Há modelo State é responsável por cuidar do estado da tela.
+
+* Há modelo de Action é responsável por cuidar das ações da tela, para não manter a ação salva no LiveData implementei a MutableAction para limpar evitando de a ação ser chamada novamente na recriação da tela.
 
 * __Repository__ - Serve para abstrair as fontes de dados e tem a responsabilidade de cuidar das regras de dados.
 
