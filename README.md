@@ -8,7 +8,7 @@ Aplicativo de exemplo para aprofundar meus conhecimentos, com foco em Android, s
 
 O Aplicativo usa o [padrão MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) e está dividido em pacotes conforme mostrado abaixo:
 
-<img src="https://github.com/carvalho-0310/Rick_Morty_MVVM/blob/organize_the_folders/modulos.jpeg" width="600"/>
+<img src="https://github.com/carvalho-0310/Rick_Morty_MVVM/blob/main/folders.jpeg" width="600"/>
 
 * __UI__ - Contém todas as classes relacionadas à UI (Activities, Adapters, etc.) a ideia dessa camada é delegar lógica para a viewmodel facilitando os testes unitários e ela só interpreta as modelos (State e Action) que vem da viewmodel.
 
