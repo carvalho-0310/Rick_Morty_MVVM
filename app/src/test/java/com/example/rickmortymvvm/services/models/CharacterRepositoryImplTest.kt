@@ -1,12 +1,14 @@
 package com.example.rickmortymvvm.services.models
 
 import android.annotation.SuppressLint
-import com.example.rickmortymvvm.models.Character
 import com.example.rickmortymvvm.data.remote.CharacterDataRemoteImpl
-import com.example.rickmortymvvm.data.repository.CharacterRepositoryImpl
 import com.example.rickmortymvvm.data.remote.CharacterService
 import com.example.rickmortymvvm.data.remote.models.CharacterResponseInfoVO
 import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
+import com.example.rickmortymvvm.data.repository.CharacterRepositoryImpl
+import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.models.Location
+import com.example.rickmortymvvm.models.Origin
 import com.google.common.truth.Truth
 import dev.thiagosouto.butler.file.readFile
 import okhttp3.mockwebserver.MockResponse
@@ -157,7 +159,9 @@ class CharacterRepositoryImplTest {
                     "Human",
                     "",
                     "Male",
-                    "2017-11-04T18:48:46.250Z"
+                    "2017-11-04T18:48:46.250Z",
+                    Location("Citadel of Ricks", "https://rickandmortyapi.com/api/location/3"),
+                    Origin("Earth (C-137)", "https://rickandmortyapi.com/api/location/1")
                 )
             )
         )
@@ -172,7 +176,9 @@ class CharacterRepositoryImplTest {
                     "Human",
                     "",
                     "Male",
-                    "2017-11-04T18:48:46.250Z"
+                    "2017-11-04T18:48:46.250Z",
+                    Location("Citadel of Ricks", "https://rickandmortyapi.com/api/location/3"),
+                    Origin("Earth (C-137)", "https://rickandmortyapi.com/api/location/1")
                 )
             )
         )

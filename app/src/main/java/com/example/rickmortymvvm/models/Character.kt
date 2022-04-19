@@ -11,10 +11,10 @@ data class Character(
     val species: String,
     val type: String,
     val gender: String,
-    val created: String
+    val created: String,
+    val location: Location,
+    val origin: Origin
 ) : Serializable, Compare<Character?> {
-    val location: Location? = null
-    val origin: Origin? = null
 
     override fun isEqual(o: Character?): Boolean {
         return equals(o)

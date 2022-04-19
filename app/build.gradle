@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion 31
 
@@ -50,12 +51,22 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.core:core-ktx:1.7.0"
 
-    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation("androidx.room:room-runtime:2.4.2")
+    implementation("androidx.room:room-rxjava2:2.4.2")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
+    kapt("androidx.room:room-compiler:2.4.2")
+    implementation("androidx.room:room-ktx:2.4.2")
+    implementation "io.insert-koin:koin-android:3.1.5"
 
+
+    testImplementation "io.mockk:mockk:1.12.3"
+    testImplementation "io.mockk:mockk-agent-jvm:1.12.3"
     testImplementation 'junit:junit:4.13.1'
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
     testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "dev.thiagosouto:file-butler:0.3.0"
+
+
 }
 
 repositories {
