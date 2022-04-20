@@ -3,8 +3,6 @@ package com.example.rickmortymvvm.services.models
 import android.annotation.SuppressLint
 import com.example.rickmortymvvm.data.remote.CharacterDataRemoteImpl
 import com.example.rickmortymvvm.data.remote.CharacterService
-import com.example.rickmortymvvm.data.remote.models.CharacterResponseInfoVO
-import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
 import com.example.rickmortymvvm.data.repository.CharacterRepositoryImpl
 import com.example.rickmortymvvm.models.Character
 import com.example.rickmortymvvm.models.Location
@@ -143,13 +141,12 @@ class CharacterRepositoryImplTest {
         val testObserverPage2 = repository.getListCharacter()
             .test()
 
-        testObserverPage1.assertResult(expectedResultOnePage)
+        testObserverPage1.assertResult(expectedResult)
         testObserverPage2.assertResult()
     }
 
     private companion object {
-        val expectedResult = CharacterResponseVO(
-            CharacterResponseInfoVO(42),
+        val expectedResult =
             listOf(
                 Character(
                     1,
@@ -164,24 +161,7 @@ class CharacterRepositoryImplTest {
                     Origin("Earth (C-137)", "https://rickandmortyapi.com/api/location/1")
                 )
             )
-        )
-        val expectedResultOnePage = CharacterResponseVO(
-            CharacterResponseInfoVO(1),
-            listOf(
-                Character(
-                    1,
-                    "Rick Sanchez",
-                    "Alive",
-                    "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                    "Human",
-                    "",
-                    "Male",
-                    "2017-11-04T18:48:46.250Z",
-                    Location("Citadel of Ricks", "https://rickandmortyapi.com/api/location/3"),
-                    Origin("Earth (C-137)", "https://rickandmortyapi.com/api/location/1")
-                )
-            )
-        )
+
         const val CODE_INTERNAL_SERVER_ERROR = 500
     }
 }
