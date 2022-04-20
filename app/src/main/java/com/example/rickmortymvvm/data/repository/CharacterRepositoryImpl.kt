@@ -1,7 +1,7 @@
 package com.example.rickmortymvvm.data.repository
 
-import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
 import com.example.rickmortymvvm.data.remote.CharacterDataRemote
+import com.example.rickmortymvvm.models.Character
 import io.reactivex.Observable
 
 class CharacterRepositoryImpl(
@@ -11,13 +11,14 @@ class CharacterRepositoryImpl(
     private var page = 1
     private var pages = 1
 
-    override fun getListCharacter(): Observable<CharacterResponseVO?> {
+    override fun getListCharacter(): Observable<List<Character>> {
         return if (page <= pages) {
             responseDataRemote.requestCharacterList(page)
                 .doOnNext { it?.info?.pages?.let { p -> pages = p } }
+                .map { it.results }
                 .doOnComplete { page++ }
         } else {
-            Observable.empty()
+            return Observable.empty()
         }
     }
 }

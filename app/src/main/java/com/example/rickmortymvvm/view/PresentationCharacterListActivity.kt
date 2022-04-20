@@ -45,6 +45,8 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
 
         pbLoading = binding.mainPbLoading
 
+        myPresentationCharacterListViewModel.setUp()
+
         myPresentationCharacterListViewModel.state.observe(this) { NewStatus ->
             notify(NewStatus)
         }

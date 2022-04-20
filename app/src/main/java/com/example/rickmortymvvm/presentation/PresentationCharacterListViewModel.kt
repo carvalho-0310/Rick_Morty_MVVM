@@ -7,4 +7,5 @@ interface PresentationCharacterListViewModel {
     fun onClickTryAgain()
     fun onClickQuit()
     fun onScrollFinal()
+    fun setUp()
 }
