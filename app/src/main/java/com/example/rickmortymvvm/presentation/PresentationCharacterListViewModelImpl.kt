@@ -1,8 +1,8 @@
 package com.example.rickmortymvvm.presentation
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.rickmortymvvm.presentation.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.presentation.PresentationCharacterListAction.GoToInfo
 import com.example.rickmortymvvm.models.Character
@@ -19,6 +19,8 @@ class PresentationCharacterListViewModelImpl(
 
     private var list: MutableList<Character> = ArrayList()
     private var requestAvailable = true
+
+    private var setUp = true
     private val _action = MutableAction<PresentationCharacterListAction>()
     val action: LiveData<PresentationCharacterListAction>
         get() = _action
@@ -29,8 +31,11 @@ class PresentationCharacterListViewModelImpl(
     val state: LiveData<PresentationCharacterListState>
         get() = _status
 
-    init {
-        requestCharacterList()
+    override fun setUp() {
+        if (setUp) {
+            requestCharacterList()
+            setUp = false
+        }
     }
 
     override fun onClickCharacter(character: Character) {
@@ -63,10 +68,9 @@ class PresentationCharacterListViewModelImpl(
                 repository.getListCharacter()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ response ->
-                        val results = response?.results
+                    .subscribe({ results ->
                         if (results != null) {
-                            list.addAll(response.results)
+                            list.addAll(results)
                             _status.value = PresentationCharacterListState(
                                 false,
                                 list,
