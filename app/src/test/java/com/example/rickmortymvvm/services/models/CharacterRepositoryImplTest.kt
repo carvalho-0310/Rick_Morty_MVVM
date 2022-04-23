@@ -42,7 +42,7 @@ class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `getListCharacter - get character list successfully`() {
+    fun `getListCharacter - Should get character list successfully`() {
         server.enqueue(
             MockResponse()
                 .setBody(

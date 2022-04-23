@@ -43,7 +43,7 @@ class CharacterDataRemoteImplTest {
     }
 
     @Test
-    fun `requestCharacterList - successful server call`() {
+    fun `requestCharacterList - Should get a list of characters in the right url`() {
         server.enqueue(MockResponse().setBody(readFile("character/character_page_1_test_answer.json")))
 
         val testObserver = dataRemote.requestCharacterList(1).test()
