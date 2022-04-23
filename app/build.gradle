@@ -66,7 +66,7 @@ dependencies {
     testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "dev.thiagosouto:file-butler:0.3.0"
 
-    testImplementation "androidx.test:core-ktx:1.4.1-alpha03"
+    testImplementation "androidx.test:core-ktx:1.4.1-alpha05"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.robolectric:robolectric:4.5.1"
     testImplementation "androidx.test.ext:junit:1.1.3"

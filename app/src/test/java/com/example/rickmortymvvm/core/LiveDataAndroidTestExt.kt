@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.presentation
+package com.example.rickmortymvvm.core
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
@@ -11,9 +11,9 @@ import java.util.concurrent.TimeoutException
 // que ja se encarrega de remover os observer apos cada teste
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun <T> LiveData<T>.getOrAwaitTestValue(
-        time: Long = 2,
-        timeUnit: TimeUnit = TimeUnit.SECONDS,
-        afterObserve: () -> Unit = {}
+    time: Long = 2,
+    timeUnit: TimeUnit = TimeUnit.SECONDS,
+    afterObserve: () -> Unit = {}
 ): T {
     var data: T? = null
     val latch = CountDownLatch(1)
@@ -33,7 +33,6 @@ fun <T> LiveData<T>.getOrAwaitTestValue(
         if (!latch.await(time, timeUnit)) {
             throw TimeoutException("LiveData value was never set.")
         }
-
     } finally {
         this.removeObserver(observer)
     }
