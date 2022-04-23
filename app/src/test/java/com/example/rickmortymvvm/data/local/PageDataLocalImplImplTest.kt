@@ -22,7 +22,7 @@ class PageDataLocalImplImplTest {
     }
 
     @Test
-    fun testSavaPages() {
+    fun `testSavaPages - Should save a page that is`() {
         val pagesTest = PagesLocal(2)
         every { pagesLocalDaoMock.savaPage(pagesTest) } returns Unit
 
@@ -32,7 +32,7 @@ class PageDataLocalImplImplTest {
     }
 
     @Test
-    fun testGetPages() {
+    fun `testGetPages - Should get the page that is`() {
         every { pagesLocalDaoMock.getPage() } returns PagesLocal(2)
 
         val result = pagesDataLocal.getPage()

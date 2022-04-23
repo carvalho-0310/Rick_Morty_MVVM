@@ -23,7 +23,7 @@ class CharacterDataLocalImplTest {
     }
 
     @Test
-    fun testSaveCharacters() {
+    fun `testSaveCharacters - Should save the character list`() {
         every { characterLocalDaoMock.savaCharacter(any()) } returns Unit
 
         characterDataLocal.saveCharacters(expectedResult)
@@ -32,7 +32,7 @@ class CharacterDataLocalImplTest {
     }
 
     @Test
-    fun testGetCharacters() {
+    fun `testGetCharacters - Should get the character list`() {
         every { characterLocalDaoMock.getList() } returns returnsLocalDao
 
         val listLocal = characterDataLocal.getCharacters().test()
