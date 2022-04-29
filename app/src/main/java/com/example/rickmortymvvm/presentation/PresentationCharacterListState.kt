@@ -1,10 +1,10 @@
 package com.example.rickmortymvvm.presentation
 
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 
 data class PresentationCharacterListState(
     val isLoadingVisible: Boolean,
-    val listCharacter: List<Character>,
+    val listCharacterVM: List<CharacterVM>,
     val isListCharacterVisible: Boolean,
     val isShowModalErrorVisible: Boolean,
 )

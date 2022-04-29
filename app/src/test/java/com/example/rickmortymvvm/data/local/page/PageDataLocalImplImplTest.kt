@@ -1,8 +1,6 @@
-package com.example.rickmortymvvm.data.local
+package com.example.rickmortymvvm.data.local.page
 
 import com.example.rickmortymvvm.data.local.models.PagesLocal
-import com.example.rickmortymvvm.data.local.page.PageDataLocalImpl
-import com.example.rickmortymvvm.data.local.page.PagesLocalDao
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

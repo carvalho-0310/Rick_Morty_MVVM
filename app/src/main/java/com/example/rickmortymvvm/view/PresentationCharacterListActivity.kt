@@ -14,7 +14,7 @@ import com.example.rickmortymvvm.presentation.PresentationCharacterListAction.Fi
 import com.example.rickmortymvvm.presentation.PresentationCharacterListAction.GoToInfo
 import com.example.rickmortymvvm.presentation.PresentationCharacterListState
 import com.example.rickmortymvvm.presentation.PresentationCharacterListViewModelImpl
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter {
@@ -55,13 +55,13 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
         }
     }
 
-    override fun onClickCharacter(character: Character) {
-        myPresentationCharacterListViewModel.onClickCharacter(character)
+    override fun onClickCharacter(characterVM: CharacterVM) {
+        myPresentationCharacterListViewModel.onClickCharacter(characterVM)
     }
 
     private fun notify(state: PresentationCharacterListState) {
         setupLoading(state.isLoadingVisible)
-        setCharacterList(state.listCharacter)
+        setCharacterList(state.listCharacterVM)
         setupListCharacter(state.isListCharacterVisible)
         setupModalError(state.isShowModalErrorVisible)
     }
@@ -70,8 +70,8 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
         pbLoading.isVisible = isLoadingVisible
     }
 
-    private fun setCharacterList(characterList: List<Character>) {
-        characterListAdapter.setListAdapter(characterList)
+    private fun setCharacterList(characterVMList: List<CharacterVM>) {
+        characterListAdapter.setListAdapter(characterVMList)
     }
 
     private fun setupListCharacter(isListCharacterVisible: Boolean) {
@@ -97,15 +97,15 @@ class PresentationCharacterListActivity : AppCompatActivity(), OnClickCharacter 
         when (action) {
             Finish -> finish()
             is GoToInfo -> {
-                val character = action.character
+                val character = action.characterVM
                 startInfo(character)
             }
         }
     }
 
-    private fun startInfo(character: Character) {
+    private fun startInfo(characterVM: CharacterVM) {
         val intent = Intent(this, InfoActivity::class.java)
-        intent.putExtra("c", character)
+        intent.putExtra("c", characterVM)
         startActivity(intent)
     }
 }

@@ -1,9 +1,9 @@
 package com.example.rickmortymvvm.presentation
 
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 
 interface PresentationCharacterListViewModel {
-    fun onClickCharacter(character: Character)
+    fun onClickCharacter(characterVM: CharacterVM)
     fun onClickTryAgain()
     fun onClickQuit()
     fun onScrollFinal()

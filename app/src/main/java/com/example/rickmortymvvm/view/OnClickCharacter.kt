@@ -1,7 +1,7 @@
 package com.example.rickmortymvvm.view
 
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 
 interface OnClickCharacter {
-    fun onClickCharacter(character: Character)
+    fun onClickCharacter(characterVM: CharacterVM)
 }
