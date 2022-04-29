@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.rickmortymvvm.data.local.character.CharacterLocalDao
-import com.example.rickmortymvvm.data.local.page.PagesLocalDao
+import com.example.rickmortymvvm.data.local.CharacterLocalDao
 import com.example.rickmortymvvm.data.local.models.CharacterLocal
 import com.example.rickmortymvvm.data.local.models.PagesLocal
 
@@ -13,7 +12,6 @@ import com.example.rickmortymvvm.data.local.models.PagesLocal
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun characterDao(): CharacterLocalDao
-    abstract fun pagesDao(): PagesLocalDao
 
     companion object {
 
