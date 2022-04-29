@@ -1,5 +1,7 @@
 package com.example.rickmortymvvm.data.local.character
 
+import com.example.rickmortymvvm.data.local.CharacterDataLocalImpl
+import com.example.rickmortymvvm.data.local.CharacterLocalDao
 import com.example.rickmortymvvm.data.local.MapperLocal
 import com.example.rickmortymvvm.data.local.models.CharacterLocal
 import com.example.rickmortymvvm.data.repository.models.CharacterRepositoryInfos
@@ -41,6 +43,15 @@ class CharacterDataLocalImplTest {
         val listLocal = characterDataLocal.getCharacters().test()
 
         listLocal.assertValue(expectedResult)
+    }
+
+    @Test
+    fun `clearLocalList - Should clean the database`() {
+        every { characterLocalDaoMock.clearLocalList() } returns Unit
+
+        characterDataLocal.clearLocalList()
+
+        verify(exactly = 1) { characterDataLocal.clearLocalList() }
     }
 
     companion object {

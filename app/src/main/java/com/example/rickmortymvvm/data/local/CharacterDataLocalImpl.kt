@@ -1,6 +1,5 @@
-package com.example.rickmortymvvm.data.local.character
+package com.example.rickmortymvvm.data.local
 
-import com.example.rickmortymvvm.data.local.MapperLocal
 import com.example.rickmortymvvm.data.repository.models.CharacterRepositoryInfos
 import io.reactivex.Observable
 
@@ -19,5 +18,9 @@ class CharacterDataLocalImpl(
         return characterLocalDao.getList().map {
             it.map { characterLocal -> mapperLocal.characterLocalFromInfosRepository(characterLocal) }
         }
+    }
+
+    override fun clearLocalList() {
+        characterLocalDao.clearLocalList()
     }
 }

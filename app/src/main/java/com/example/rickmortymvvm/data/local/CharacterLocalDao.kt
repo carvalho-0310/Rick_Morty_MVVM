@@ -1,4 +1,4 @@
-package com.example.rickmortymvvm.data.local.character
+package com.example.rickmortymvvm.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -14,4 +14,7 @@ interface CharacterLocalDao {
 
     @Query("SELECT * FROM ${CharacterLocal.TABLE_NAME}")
     fun getList(): Observable<List<CharacterLocal>>
+
+    @Query("DELETE FROM ${CharacterLocal.TABLE_NAME}")
+    fun clearLocalList()
 }
