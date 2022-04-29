@@ -8,5 +8,5 @@ import retrofit2.http.Query
 
 interface CharacterService {
     @GET("character/")
-    fun listCharacter(@Query("page") currentPage: Int): Observable<CharacterResponseVO?>
+    fun listCharacter(@Query("page") currentPage: Int): Observable<CharacterResponseVO>
 }

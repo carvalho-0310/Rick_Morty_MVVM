@@ -1,14 +1,16 @@
-package com.example.rickmortymvvm.services
+package com.example.rickmortymvvm.data.remote
 
-import com.example.rickmortymvvm.data.remote.CharacterDataRemoteImpl
-import com.example.rickmortymvvm.data.remote.CharacterService
+import com.example.rickmortymvvm.data.remote.models.OriginRemote
+import com.example.rickmortymvvm.data.remote.models.LocationRemote
+import com.example.rickmortymvvm.data.remote.models.CharacterRemote
 import com.example.rickmortymvvm.data.remote.models.CharacterResponseInfoVO
 import com.example.rickmortymvvm.data.remote.models.CharacterResponseVO
-import com.example.rickmortymvvm.models.Character
-import com.example.rickmortymvvm.models.Location
-import com.example.rickmortymvvm.models.Origin
+import com.example.rickmortymvvm.data.repository.models.CharacterRepositoryInfos
+import com.example.rickmortymvvm.data.repository.models.InfosRepository
 import com.google.common.truth.Truth.assertThat
 import dev.thiagosouto.butler.file.readFile
+import io.mockk.every
+import io.mockk.mockk
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -23,7 +25,8 @@ class CharacterDataRemoteImplTest {
 
     lateinit var server: MockWebServer
     lateinit var retrofit: Retrofit
-    lateinit var dataRemote: CharacterDataRemoteImpl
+    private lateinit var dataRemote: CharacterDataRemoteImpl
+    lateinit var mapperMock: MapperRemote
 
     @Before
     fun before() {
@@ -34,7 +37,8 @@ class CharacterDataRemoteImplTest {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        dataRemote = CharacterDataRemoteImpl(retrofit.create(CharacterService::class.java))
+        mapperMock = mockk()
+        dataRemote = CharacterDataRemoteImpl(retrofit.create(CharacterService::class.java), mapperMock)
     }
 
     @After
@@ -44,13 +48,14 @@ class CharacterDataRemoteImplTest {
 
     @Test
     fun `requestCharacterList - Should get a list of characters in the right url`() {
+        every { mapperMock.responseFromInfosRepository(expectedResult) } returns expectedResultMapper
         server.enqueue(MockResponse().setBody(readFile("character/character_page_1_test_answer.json")))
 
         val testObserver = dataRemote.requestCharacterList(1).test()
 
         val request = server.takeRequest()
         assertThat(request.path).isEqualTo("/character/?page=1")
-        testObserver.assertResult(expectedResult)
+        testObserver.assertResult(expectedResultMapper)
     }
 
     @Test
@@ -66,7 +71,7 @@ class CharacterDataRemoteImplTest {
         val expectedResult = CharacterResponseVO(
             CharacterResponseInfoVO(42),
             listOf(
-                Character(
+                CharacterRemote(
                     1,
                     "Rick Sanchez",
                     "Alive",
@@ -75,11 +80,38 @@ class CharacterDataRemoteImplTest {
                     "",
                     "Male",
                     "2017-11-04T18:48:46.250Z",
-                    Location("Citadel of Ricks", "https://rickandmortyapi.com/api/location/3"),
-                    Origin("Earth (C-137)", "https://rickandmortyapi.com/api/location/1")
+                    LocationRemote(
+                        "Citadel of Ricks",
+                        "https://rickandmortyapi.com/api/location/3"
+                    ),
+                    OriginRemote(
+                        "Earth (C-137)",
+                        "https://rickandmortyapi.com/api/location/1"
+                    )
                 )
             )
         )
+
+        val expectedResultMapper = InfosRepository(
+            42,
+            listOf(
+                CharacterRepositoryInfos(
+                    1,
+                    "Rick Sanchez",
+                    "Alive",
+                    "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                    "Human",
+                    "",
+                    "Male",
+                    "2017-11-04T18:48:46.250Z",
+                    "Citadel of Ricks",
+                    "https://rickandmortyapi.com/api/location/3",
+                    "Earth (C-137)",
+                    "https://rickandmortyapi.com/api/location/1"
+                )
+            )
+        )
+
         const val CODE_INTERNAL_SERVER_ERROR = 500
     }
 }

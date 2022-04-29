@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.databinding.ModelMainActivityBinding
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 import com.example.rickmortymvvm.app.util.adapter.DiffUtilGeneric
 
 class ListCharacterAdapter(private val presentationCharacterListActivity: PresentationCharacterListActivity) :
     RecyclerView.Adapter<ListCharacterAdapter.ViewHolder>() {
-    private val list: MutableList<Character> = ArrayList()
+    private val list: MutableList<CharacterVM> = ArrayList()
 
-    fun setListAdapter(newList: List<Character>) {
+    fun setListAdapter(newList: List<CharacterVM>) {
         val diffResult = DiffUtil.calculateDiff(DiffUtilGeneric(list, newList))
         list.clear()
         list.addAll(newList)
@@ -46,20 +46,20 @@ class ListCharacterAdapter(private val presentationCharacterListActivity: Presen
         private val imageView = binding.image
         private val nameView = binding.name
         private val statusView = binding.status
-        private lateinit var character: Character
+        private lateinit var characterVM: CharacterVM
 
-        fun bind(character: Character) {
-            this.character = character
+        fun bind(characterVM: CharacterVM) {
+            this.characterVM = characterVM
             Glide.with(imageView)
-                .load(character.image)
+                .load(characterVM.image)
                 .into(imageView)
-            nameView.text = character.name
-            statusView.text = character.status
+            nameView.text = characterVM.name
+            statusView.text = characterVM.status
 
-            if (character.status == "Dead") {
+            if (characterVM.status == "Dead") {
                 val color = ContextCompat.getColor(statusView.context, R.color.colorRed)
                 statusView.setTextColor(color)
-            } else if (character.status == "Alive") {
+            } else if (characterVM.status == "Alive") {
                 val color = ContextCompat.getColor(statusView.context, R.color.colorgreem)
                 statusView.setTextColor(color)
             } else {
@@ -70,7 +70,7 @@ class ListCharacterAdapter(private val presentationCharacterListActivity: Presen
 
         init {
             binding.root.setOnClickListener {
-                clickCharacter.onClickCharacter(character)
+                clickCharacter.onClickCharacter(characterVM)
             }
         }
     }

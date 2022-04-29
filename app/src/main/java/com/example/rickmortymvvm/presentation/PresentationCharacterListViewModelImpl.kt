@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.rickmortymvvm.presentation.PresentationCharacterListAction.Finish
 import com.example.rickmortymvvm.presentation.PresentationCharacterListAction.GoToInfo
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 import com.example.rickmortymvvm.data.repository.CharacterRepository
 import com.example.rickmortymvvm.app.util.observer.MutableAction
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,10 +14,11 @@ import io.reactivex.schedulers.Schedulers
 
 class PresentationCharacterListViewModelImpl(
     private val disposable: CompositeDisposable,
-    private val repository: CharacterRepository
+    private val repository: CharacterRepository,
+    private val mapperViewModel: MapperViewModel
 ) : PresentationCharacterListViewModel, ViewModel() {
 
-    private var list: MutableList<Character> = ArrayList()
+    private var list: MutableList<CharacterVM> = ArrayList()
     private var requestAvailable = true
 
     private var setUp = true
@@ -38,8 +39,8 @@ class PresentationCharacterListViewModelImpl(
         }
     }
 
-    override fun onClickCharacter(character: Character) {
-        _action.sendAction(GoToInfo(character))
+    override fun onClickCharacter(characterVM: CharacterVM) {
+        _action.sendAction(GoToInfo(characterVM))
     }
 
     override fun onClickTryAgain() {
@@ -70,7 +71,7 @@ class PresentationCharacterListViewModelImpl(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ results ->
                         if (results != null) {
-                            list.addAll(results)
+                            list.addAll(results.map { mapperViewModel.characterFromCharacterVm(it) })
                             _status.value = PresentationCharacterListState(
                                 false,
                                 list,

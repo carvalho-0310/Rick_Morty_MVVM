@@ -1,14 +1,17 @@
-package com.example.rickmortymvvm.services.models
+package com.example.rickmortymvvm.data.repository
 
 import android.annotation.SuppressLint
 import com.example.rickmortymvvm.data.remote.CharacterDataRemoteImpl
 import com.example.rickmortymvvm.data.remote.CharacterService
-import com.example.rickmortymvvm.data.repository.CharacterRepositoryImpl
+import com.example.rickmortymvvm.data.remote.MapperRemoteImpl
+import com.example.rickmortymvvm.data.repository.models.CharacterRepositoryInfos
 import com.example.rickmortymvvm.models.Character
 import com.example.rickmortymvvm.models.Location
 import com.example.rickmortymvvm.models.Origin
 import com.google.common.truth.Truth
 import dev.thiagosouto.butler.file.readFile
+import io.mockk.every
+import io.mockk.mockk
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -22,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CharacterRepositoryImplTest {
     lateinit var server: MockWebServer
     lateinit var repository: CharacterRepositoryImpl
+    lateinit var mapperRepositoryMockk: MapperRepository
 
     @Before
     fun before() {
@@ -33,7 +37,8 @@ class CharacterRepositoryImplTest {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(CharacterService::class.java)
-        repository = CharacterRepositoryImpl(CharacterDataRemoteImpl(service))
+        mapperRepositoryMockk = mockk()
+        repository = CharacterRepositoryImpl(CharacterDataRemoteImpl(service, MapperRemoteImpl()), mapperRepositoryMockk)
     }
 
     @After
@@ -49,11 +54,12 @@ class CharacterRepositoryImplTest {
                     readFile("character/character_page_1_test_answer.json")
                 )
         )
+        every { mapperRepositoryMockk.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
 
         val testObserver = repository.getListCharacter()
             .test()
 
-        testObserver.assertResult(expectedResult)
+        testObserver.assertResult(characterList)
     }
 
     @SuppressLint("CheckResult") // test only pagination
@@ -91,9 +97,11 @@ class CharacterRepositoryImplTest {
                 .setBody(readFile("character/character_page_1_test_answer.json"))
         )
         server.enqueue(MockResponse().setResponseCode(CODE_INTERNAL_SERVER_ERROR))
+        every { mapperRepositoryMockk.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
 
         repository.getListCharacter()
             .test()
+
         repository.getListCharacter()
             .test()
 
@@ -135,18 +143,37 @@ class CharacterRepositoryImplTest {
             MockResponse()
                 .setBody(readFile("character/character_page_1_test_answer_with_a_page.json"))
         )
+        every { mapperRepositoryMockk.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
 
         val testObserverPage1 = repository.getListCharacter()
             .test()
         val testObserverPage2 = repository.getListCharacter()
             .test()
 
-        testObserverPage1.assertResult(expectedResult)
+        testObserverPage1.assertResult(characterList)
         testObserverPage2.assertResult()
     }
 
     private companion object {
-        val expectedResult =
+        val characterRepositoryInfosList =
+            listOf(
+                CharacterRepositoryInfos(
+                    1,
+                    "Rick Sanchez",
+                    "Alive",
+                    "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                    "Human",
+                    "",
+                    "Male",
+                    "2017-11-04T18:48:46.250Z",
+                    "Citadel of Ricks",
+                    "https://rickandmortyapi.com/api/location/3",
+                    "Earth (C-137)",
+                    "https://rickandmortyapi.com/api/location/1"
+                )
+            )
+
+        val characterList =
             listOf(
                 Character(
                     1,

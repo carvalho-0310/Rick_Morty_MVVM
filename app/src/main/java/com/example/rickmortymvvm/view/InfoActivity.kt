@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.rickmortymvvm.R
 import com.example.rickmortymvvm.databinding.ActivityInfosBinding
-import com.example.rickmortymvvm.models.Character
+import com.example.rickmortymvvm.presentation.models.CharacterVM
 import java.util.Objects
 
 class InfoActivity : AppCompatActivity() {
@@ -17,7 +17,7 @@ class InfoActivity : AppCompatActivity() {
         binding = ActivityInfosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val character = (intent.getSerializableExtra("c") as Character)
+        val character = (intent.getSerializableExtra("c") as CharacterVM)
         val imageView = binding.imageInfo
         val nameView = binding.nameInfo
         val statusView = binding.statusInfo
@@ -36,9 +36,9 @@ class InfoActivity : AppCompatActivity() {
         speciesView.text = getString(R.string.species, character.species)
         genderView.text = getString(R.string.gender, character.gender)
         originView.text =
-            getString(R.string.origin, Objects.requireNonNull(character.origin?.name))
+            getString(R.string.origin, Objects.requireNonNull(character.originVM?.name))
         localization.text =
-            getString(R.string.location, Objects.requireNonNull(character.location?.name))
+            getString(R.string.location, Objects.requireNonNull(character.locationVM?.name))
         if (character.status.contains("Dead")) {
             val color = ContextCompat.getColor(statusView.context, R.color.colorRedTrans)
             statusView.setBackgroundColor(color)

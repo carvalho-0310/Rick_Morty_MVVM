@@ -1,9 +1,8 @@
 package com.example.rickmortymvvm.data.local.character
 
+import com.example.rickmortymvvm.data.local.MapperLocal
 import com.example.rickmortymvvm.data.local.models.CharacterLocal
-import com.example.rickmortymvvm.models.Character
-import com.example.rickmortymvvm.models.Location
-import com.example.rickmortymvvm.models.Origin
+import com.example.rickmortymvvm.data.repository.models.CharacterRepositoryInfos
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -14,26 +13,30 @@ import org.junit.Test
 class CharacterDataLocalImplTest {
 
     private lateinit var characterLocalDaoMock: CharacterLocalDao
+    private lateinit var mapperMockImpl: MapperLocal
     private lateinit var characterDataLocal: CharacterDataLocalImpl
 
     @Before
     fun before() {
         characterLocalDaoMock = mockk()
-        characterDataLocal = CharacterDataLocalImpl(characterLocalDaoMock)
+        mapperMockImpl = mockk()
+        characterDataLocal = CharacterDataLocalImpl(characterLocalDaoMock, mapperMockImpl)
     }
 
     @Test
     fun `testSaveCharacters - Should save the character list`() {
         every { characterLocalDaoMock.savaCharacter(any()) } returns Unit
+        every { mapperMockImpl.characterRepositoryInfosFromCharacterLocal(expectedResult[0]) } returns characterLocal
 
         characterDataLocal.saveCharacters(expectedResult)
 
-        verify(exactly = 1) { characterLocalDaoMock.savaCharacter(expectedSava) }
+        verify(exactly = 1) { characterLocalDaoMock.savaCharacter(characterLocal) }
     }
 
     @Test
     fun `testGetCharacters - Should get the character list`() {
         every { characterLocalDaoMock.getList() } returns returnsLocalDao
+        every { mapperMockImpl.characterLocalFromInfosRepository(characterLocal) } returns expectedResult[0]
 
         val listLocal = characterDataLocal.getCharacters().test()
 
@@ -42,7 +45,7 @@ class CharacterDataLocalImplTest {
 
     companion object {
         val expectedResult = listOf(
-            Character(
+            CharacterRepositoryInfos(
                 1,
                 "name",
                 "status",
@@ -51,10 +54,13 @@ class CharacterDataLocalImplTest {
                 "type",
                 "gender",
                 "created",
-                Location("location name", "location url"),
-                Origin("origin name", "origin url")
+                "location name",
+                "location url",
+                "origin name",
+                "origin url"
             )
         )
+
         val returnsLocalDao = ObservableFromCallable {
             listOf(
                 CharacterLocal(
@@ -73,7 +79,7 @@ class CharacterDataLocalImplTest {
                 )
             )
         }
-        val expectedSava = CharacterLocal(
+        val characterLocal = CharacterLocal(
             1,
             "name",
             "status",
