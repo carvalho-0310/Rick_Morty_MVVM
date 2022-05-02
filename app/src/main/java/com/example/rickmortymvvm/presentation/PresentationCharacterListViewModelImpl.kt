@@ -21,7 +21,7 @@ class PresentationCharacterListViewModelImpl(
     private var list: MutableList<CharacterVM> = ArrayList()
     private var requestAvailable = true
 
-    private var setUp = true
+    private var isSetUp = true
     private val _action = MutableAction<PresentationCharacterListAction>()
     val action: LiveData<PresentationCharacterListAction>
         get() = _action
@@ -33,9 +33,9 @@ class PresentationCharacterListViewModelImpl(
         get() = _status
 
     override fun setUp() {
-        if (setUp) {
+        if (isSetUp) {
             requestCharacterList()
-            setUp = false
+            isSetUp = false
         }
     }
 
