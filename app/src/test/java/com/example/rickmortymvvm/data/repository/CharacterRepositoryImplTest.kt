@@ -1,6 +1,7 @@
 package com.example.rickmortymvvm.data.repository
 
 import android.annotation.SuppressLint
+import com.example.rickmortymvvm.data.local.CharacterDataLocal
 import com.example.rickmortymvvm.data.remote.CharacterDataRemoteImpl
 import com.example.rickmortymvvm.data.remote.CharacterService
 import com.example.rickmortymvvm.data.remote.MapperRemoteImpl
@@ -12,20 +13,21 @@ import com.google.common.truth.Truth
 import dev.thiagosouto.butler.file.readFile
 import io.mockk.every
 import io.mockk.mockk
+import io.reactivex.Observable
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.HttpException
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class CharacterRepositoryImplTest {
     lateinit var server: MockWebServer
     lateinit var repository: CharacterRepositoryImpl
-    lateinit var mapperRepositoryMockk: MapperRepository
+    lateinit var mapperRepositoryMock: MapperRepository
+    lateinit var daoMock: CharacterDataLocal
 
     @Before
     fun before() {
@@ -37,8 +39,9 @@ class CharacterRepositoryImplTest {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(CharacterService::class.java)
-        mapperRepositoryMockk = mockk()
-        repository = CharacterRepositoryImpl(CharacterDataRemoteImpl(service, MapperRemoteImpl()), mapperRepositoryMockk)
+        mapperRepositoryMock = mockk()
+        daoMock = mockk(relaxed = true)
+        repository = CharacterRepositoryImpl(CharacterDataRemoteImpl(service, MapperRemoteImpl()), mapperRepositoryMock, daoMock)
     }
 
     @After
@@ -54,7 +57,10 @@ class CharacterRepositoryImplTest {
                     readFile("character/character_page_1_test_answer.json")
                 )
         )
-        every { mapperRepositoryMockk.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
+        every { mapperRepositoryMock.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
+        every { daoMock.saveCharacters(any()) } returns Unit
+        every { daoMock.clearLocalList() } returns Unit
+        every { daoMock.getCharacters() } returns Observable.just(characterRepositoryInfosList)
 
         val testObserver = repository.getListCharacter()
             .test()
@@ -82,11 +88,13 @@ class CharacterRepositoryImplTest {
     @Test
     fun `getListCharacter - When returning status code 500 Should return an HttpException`() {
         server.enqueue(MockResponse().setResponseCode(CODE_INTERNAL_SERVER_ERROR))
+        every { mapperRepositoryMock.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
+        every { daoMock.getCharacters() } returns Observable.just(characterRepositoryInfosList)
 
         val testObserver = repository.getListCharacter()
             .test()
 
-        testObserver.assertFailure(HttpException::class.java)
+        testObserver.assertResult(characterList)
     }
 
     @SuppressLint("CheckResult") // test only pagination
@@ -97,7 +105,7 @@ class CharacterRepositoryImplTest {
                 .setBody(readFile("character/character_page_1_test_answer.json"))
         )
         server.enqueue(MockResponse().setResponseCode(CODE_INTERNAL_SERVER_ERROR))
-        every { mapperRepositoryMockk.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
+        every { mapperRepositoryMock.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
 
         repository.getListCharacter()
             .test()
@@ -143,7 +151,10 @@ class CharacterRepositoryImplTest {
             MockResponse()
                 .setBody(readFile("character/character_page_1_test_answer_with_a_page.json"))
         )
-        every { mapperRepositoryMockk.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
+        every { mapperRepositoryMock.characterRepositoryInfosFromCharacter(characterRepositoryInfosList[0]) } returns characterList[0]
+        every { daoMock.saveCharacters(any()) } returns Unit
+        every { daoMock.clearLocalList() } returns Unit
+        every { daoMock.getCharacters() } returns Observable.just(characterRepositoryInfosList)
 
         val testObserverPage1 = repository.getListCharacter()
             .test()
