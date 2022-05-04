@@ -11,6 +11,7 @@ import com.example.rickmortymvvm.app.util.observer.MutableAction
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class PresentationCharacterListViewModelImpl(
     private val disposable: CompositeDisposable,
@@ -33,10 +34,12 @@ class PresentationCharacterListViewModelImpl(
         get() = _status
 
     override fun setUp() {
+        Timber.d("entrou no setUp")
         if (isSetUp) {
             requestCharacterList()
             isSetUp = false
         }
+        Timber.d("setUp = $isSetUp")
     }
 
     override fun onClickCharacter(characterVM: CharacterVM) {
@@ -58,6 +61,7 @@ class PresentationCharacterListViewModelImpl(
     private fun requestCharacterList() {
         if (requestAvailable) {
             requestAvailable = false
+            Timber.d("requestAvailable = $requestAvailable")
             _status.value = PresentationCharacterListState(
                 true,
                 list,
